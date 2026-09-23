@@ -149,6 +149,22 @@ const projectMetadata: Record<string, LocalizedProjectMetadata> = {
       useSocialImage: false,
     },
   },
+  "simka-store": {
+    ru: {
+      title: "SIMKA Store: магазин SIM и eSIM — кейс | Andrian.Dev",
+      description: "Разбор SIMKA Store: каталог тарифов, оформление заказов, доставка SIM, выдача eSIM, аналитика и Telegram-админка.",
+      h1: "Магазин SIM и eSIM SIMKA Store",
+      locale: "ru_RU",
+      useSocialImage: false,
+    },
+    en: {
+      title: "SIMKA Store SIM & eSIM Commerce Case — Andrian.Dev",
+      description: "SIMKA Store case study: tariff discovery, checkout, physical SIM delivery, eSIM fulfilment, analytics, and Telegram operations.",
+      h1: "SIMKA Store SIM and eSIM platform",
+      locale: "en_US",
+      useSocialImage: false,
+    },
+  },
 };
 
 const projectRoutes: IndexableRoute[] = projects.flatMap((project) => {

@@ -51,7 +51,7 @@ export function ProjectsSection() {
   useEffect(() => {
     const onProjectChange = (event: Event) => {
       const projectId = (event as CustomEvent<FeaturedProjectId>).detail;
-      if (projectId === "nebo" || projectId === "drop" || projectId === "tehnotek") setSelectedProject(projectId);
+      if (projectId === "nebo" || projectId === "drop" || projectId === "tehnotek" || projectId === "simka") setSelectedProject(projectId);
     };
     window.addEventListener(featuredProjectEvent, onProjectChange);
     return () => window.removeEventListener(featuredProjectEvent, onProjectChange);
@@ -106,10 +106,11 @@ export function ProjectsSection() {
           </div>}
           <div className="selected-work-head" id="more-work">
             <p className="eyebrow"><span />{language === "ru" ? "ДРУГИЕ РАБОТЫ" : "OTHER SELECTED WORK"}</p>
-            <p>{language === "ru" ? "Два рабочих прототипа и клиентский продукт на этапе проектирования — статусы указаны честно." : "Two working prototypes and a client product currently in design, with every status shown clearly."}</p>
+            <p>{language === "ru" ? "Рабочие продукты, публичные демо и проекты в разработке — без выдуманных результатов и скрытых статусов." : "Working products, public demos, and in-progress builds, with real scope and every status shown clearly."}</p>
           </div>
           <div className="selected-work-grid">
             {portfolioHighlights.map((item, index) => {
+              const projectExists = projects.some((projectItem) => projectItem.slug === item.slug);
               const content = (
                 <article id={`project-${item.visual}-case`} className={`selected-work-card selected-work-${item.visual}`} style={{ "--project-accent": item.accent } as React.CSSProperties}>
                   <div className="selected-work-topline"><span>{item.id}</span><i /><span>{item.status[language]}</span></div>
@@ -120,13 +121,14 @@ export function ProjectsSection() {
                     <p>{item.description[language]}</p>
                     <div className="tech-list">{item.technologies.map((technology) => <span key={technology}>{technology}</span>)}</div>
                     <span className="selected-work-link">
-                      {item.liveUrl ? (language === "ru" ? "Открыть проект" : "Open project") : (language === "ru" ? "Проектируется" : "In design")}
-                      {item.liveUrl && <ArrowUpRight aria-hidden="true" size={17} />}
+                      {projectExists ? (language === "ru" ? "Разобрать кейс" : "View case") : (language === "ru" ? "Проектируется" : "In design")}
+                      {projectExists && <ArrowUpRight aria-hidden="true" size={17} />}
                     </span>
                   </div>
                 </article>
               );
-              return <Reveal key={item.slug} delay={index * 0.08} className="selected-work-reveal">{item.liveUrl ? <a className="selected-work-anchor" href={item.liveUrl} target="_blank" rel="noreferrer" aria-label={`${language === "ru" ? "Открыть проект" : "Open project"}: ${item.title}`}>{content}</a> : content}</Reveal>;
+              const caseHref = `${language === "en" ? "/en" : ""}/projects/${item.slug}`;
+              return <Reveal key={item.slug} delay={index * 0.08} className="selected-work-reveal">{projectExists ? <a className="selected-work-anchor" href={caseHref} aria-label={`${language === "ru" ? "Разобрать кейс" : "View case"}: ${item.title}`}>{content}</a> : content}</Reveal>;
             })}
           </div>
         </div>

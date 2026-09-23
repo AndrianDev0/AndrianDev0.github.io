@@ -26,7 +26,7 @@ export type PortfolioHighlight = {
   status: { en: string; ru: string };
   technologies: string[];
   accent: string;
-  visual: "drop" | "tehnotek" | "trainer";
+  visual: "drop" | "tehnotek" | "simka" | "trainer";
   liveUrl?: string;
 };
 
@@ -75,6 +75,21 @@ export const projects: Project[] = [
     challenge: "Explain a technical manufacturing offer to decision-makers without turning the page into a dense specification sheet. The request path had to support both an early enquiry and a client who already has a drawing or technical brief.",
     solution: "The prototype separates positioning, capabilities, production proof, and the request flow into a clear reading sequence. Technical files can be attached at the point where the visitor is ready to discuss manufacturing.",
     result: "A responsive working prototype that shows how an industrial company can present expertise, build trust through a concrete case, and collect a more informed project request.",
+  },
+  {
+    id: "04",
+    slug: "simka-store",
+    title: "SIMKA STORE",
+    category: "SIM & eSIM E-commerce Platform",
+    description: "A full-stack storefront for physical SIM cards and eSIM plans with destination-based discovery, checkout, fulfilment, analytics, and Telegram operations.",
+    technologies: ["Next.js", "PostgreSQL", "Telegram Bot"],
+    kind: "website",
+    accent: "#c8ff45",
+    liveUrl: "https://andriandev0.github.io/simka-store/",
+    previewUrl: "https://andriandev0.github.io/simka-store/",
+    challenge: "Make a large telecom catalogue easy to navigate while supporting two very different products: instantly delivered eSIM plans and physical SIM cards that require shipping and tracking.",
+    solution: "The product combines country and operator discovery, structured tariff cards, server-validated checkout, crypto or manager-assisted payment, fulfilment flows, and a role-based Telegram operations bot.",
+    result: "A production-oriented commerce platform with a public catalogue demo and the operational foundation for orders, delivery, eSIM fulfilment, analytics, partner attribution, backups, and support.",
   },
 ];
 
@@ -125,6 +140,28 @@ export const portfolioHighlights: PortfolioHighlight[] = [
   },
   {
     id: "04",
+    slug: "simka-store",
+    title: "SIMKA STORE",
+    category: {
+      en: "SIM & eSIM commerce platform",
+      ru: "Платформа для продажи SIM и eSIM",
+    },
+    description: {
+      en: "A full-stack travel connectivity store with tariff discovery, checkout, delivery and eSIM fulfilment, analytics, and Telegram-based operations.",
+      ru: "Полноценный магазин связи для путешествий: подбор тарифов, оформление, доставка SIM и выдача eSIM, аналитика и управление через Telegram.",
+    },
+    highlights: {
+      en: ["Country and operator based catalogue", "Physical SIM delivery and eSIM fulfilment", "Orders and analytics managed from Telegram"],
+      ru: ["Каталог по странам и операторам", "Доставка SIM и автоматическая выдача eSIM", "Заказы и аналитика в Telegram-админке"],
+    },
+    status: { en: "PUBLIC DEMO", ru: "ПУБЛИЧНОЕ ДЕМО" },
+    technologies: ["Next.js", "PostgreSQL", "Telegram Bot"],
+    accent: "#c8ff45",
+    visual: "simka",
+    liveUrl: "https://andriandev0.github.io/simka-store/",
+  },
+  {
+    id: "05",
     slug: "ai-support-trainer",
     title: "AI SUPPORT / 30",
     category: {

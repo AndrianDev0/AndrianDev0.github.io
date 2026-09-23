@@ -74,12 +74,12 @@ test("hero project carousel supports buttons and keyboard navigation", async ({ 
 
   const carousel = page.getByRole("region", { name: "Избранные проекты" });
   await expect(carousel.getByText("NEBO BISTRO", { exact: true })).toBeVisible();
-  const neboImage = await carousel.locator(".hero-project-slide.is-active .nebo-proof-app img").evaluate((image) => ({
+  const neboImage = await carousel.locator(".hero-project-slide.is-active img").evaluate((image) => ({
     src: (image as HTMLImageElement).currentSrc,
     fit: getComputedStyle(image).objectFit,
   }));
-  expect(neboImage.src).toContain("prize-wheel.webp");
-  expect(neboImage.fit).toBe("contain");
+  expect(neboImage.src).toContain("og-v2.jpg");
+  expect(neboImage.fit).toBe("cover");
 
   await carousel.getByRole("button", { name: "Следующий проект" }).click();
   await expect(carousel.getByText("DROP / AIR FORCE 1", { exact: true })).toBeVisible();
@@ -87,7 +87,7 @@ test("hero project carousel supports buttons and keyboard navigation", async ({ 
     src: (image as HTMLImageElement).currentSrc,
     fit: getComputedStyle(image).objectFit,
   }));
-  expect(dropImage.src).toContain("drop-mobile-first-screen.png");
+  expect(dropImage.src).toContain("drop-air-force-1.webp");
   expect(dropImage.fit).toBe("cover");
   const openControl = await carousel.locator(".hero-project-slide.is-active .hero-project-open").evaluate((control) => {
     const icon = control.querySelector("svg") as SVGElement;
@@ -119,10 +119,22 @@ test("hero project carousel supports buttons and keyboard navigation", async ({ 
     src: (image as HTMLImageElement).currentSrc,
     fit: getComputedStyle(image).objectFit,
   }));
-  expect(tehnotekImage.src).toContain("tehnotek-mobile-first-screen.png");
+  expect(tehnotekImage.src).toContain("tehnotek-prototype.webp");
   expect(tehnotekImage.fit).toBe("cover");
   await expect(page.locator(".project-flagship").getByRole("heading", { name: "ТЕХНОТЭК" })).toBeVisible();
   await expect(page.locator(".project-flagship").getByText("ПРОТОТИП", { exact: true })).toBeVisible();
+
+  await carousel.focus();
+  await carousel.press("ArrowRight");
+  await expect(carousel.getByText("SIMKA STORE", { exact: true })).toBeVisible();
+  await expect(carousel.getByText("ПУБЛИЧНОЕ ДЕМО", { exact: true })).toBeVisible();
+  const simkaImage = await carousel.locator(".hero-project-slide.is-active img").evaluate((image) => ({
+    src: (image as HTMLImageElement).currentSrc,
+    fit: getComputedStyle(image).objectFit,
+  }));
+  expect(simkaImage.src).toContain("simka-store.png");
+  expect(simkaImage.fit).toBe("cover");
+  await expect(page.locator(".project-flagship").getByRole("heading", { name: "SIMKA STORE" })).toBeVisible();
 
   await carousel.getByRole("button", { name: "Показать NEBO BISTRO" }).click();
   await expect(page.locator(".project-flagship").getByRole("heading", { name: "NEBO BISTRO" })).toBeVisible();
@@ -152,6 +164,7 @@ test("project case is reachable and has its own content", async ({ page }) => {
 for (const projectCase of [
   { slug: "drop-3d-store", title: "DROP / AIR FORCE 1", liveLabel: /Открыть рабочий концепт/, image: "drop-air-force-1.webp" },
   { slug: "tehnotek-prototype", title: "ТЕХНОТЭК", liveLabel: /Открыть прототип/, image: "tehnotek-prototype.webp" },
+  { slug: "simka-store", title: "SIMKA STORE", liveLabel: /Открыть публичное демо/, image: "simka-store.png" },
 ] as const) {
   test(`mobile: ${projectCase.slug} has a complete case study`, async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 });
@@ -168,7 +181,8 @@ for (const projectCase of [
     expect(caseVisual.image).toContain(projectCase.image);
     expect(caseVisual.width).toBeGreaterThan(330);
     expect(caseVisual.height / caseVisual.width).toBeLessThan(0.65);
-    await expect(page).toHaveTitle(new RegExp(projectCase.slug === "drop-3d-store" ? "DROP" : "ТЕХНОТЭК", "i"));
+    const titleToken = projectCase.slug === "drop-3d-store" ? "DROP" : projectCase.slug === "tehnotek-prototype" ? "ТЕХНОТЭК" : "SIMKA";
+    await expect(page).toHaveTitle(new RegExp(titleToken, "i"));
   });
 }
 

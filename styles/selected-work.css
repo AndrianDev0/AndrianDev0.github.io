@@ -77,7 +77,8 @@
 }
 
 .drop-project-visual img,
-.tehnotek-project-visual img {
+.tehnotek-project-visual img,
+.simka-project-visual img {
   width: 100%;
   height: 100%;
   display: block;
@@ -86,12 +87,12 @@
   filter: saturate(.9) contrast(1.02);
   transition: transform .8s var(--ease), filter .5s var(--ease);
 }
-.drop-project-visual picture,
-.tehnotek-project-visual picture { display: block; width: 100%; height: 100%; }
 .selected-work-anchor:hover .drop-project-visual img,
-.selected-work-anchor:hover .tehnotek-project-visual img { transform: scale(1.025); filter: saturate(1) contrast(1.02); }
+.selected-work-anchor:hover .tehnotek-project-visual img,
+.selected-work-anchor:hover .simka-project-visual img { transform: scale(1.025); filter: saturate(1) contrast(1.02); }
 .drop-project-visual figcaption,
-.tehnotek-project-visual figcaption {
+.tehnotek-project-visual figcaption,
+.simka-project-visual figcaption {
   position: absolute;
   inset: auto 14px 14px;
   display: flex;
@@ -108,6 +109,7 @@
 }
 .drop-project-visual figcaption b { color: #a8f2dc; font-weight: 500; }
 .tehnotek-project-visual figcaption b { color: #79caff; font-weight: 500; }
+.simka-project-visual figcaption b { color: #c8ff45; font-weight: 600; }
 
 .trainer-project-visual {
   display: grid;
@@ -191,13 +193,15 @@
   .selected-work-head { display: block; margin-top: 70px; padding-top: 24px; }
   .selected-work-head > p:last-child { margin-top: 20px; font-size: 12px; }
   .selected-work-grid { gap: 12px; margin-top: 30px; }
-  .selected-work-card { min-height: 0; grid-template-rows: auto 235px auto; border-radius: 14px; }
+  .selected-work-card { min-height: 0; grid-template-rows: auto minmax(190px,52vw) auto; border-radius: 14px; }
   .selected-work-topline { min-height: 48px; padding: 0 16px; }
   .selected-work-visual { margin: 0 10px; border-radius: 10px; }
   .drop-project-visual figcaption,
-  .tehnotek-project-visual figcaption { inset: auto 8px 8px; padding: 8px; }
+  .tehnotek-project-visual figcaption,
+  .simka-project-visual figcaption { inset: auto 8px 8px; padding: 8px; font-size:9px; }
   .drop-project-visual figcaption b,
-  .tehnotek-project-visual figcaption b { display: none; }
+  .tehnotek-project-visual figcaption b,
+  .simka-project-visual figcaption b { display: none; }
   .trainer-phone { width: 82%; padding: 11px; border-radius: 16px; }
   .trainer-message { padding: 14px; }
   .trainer-message strong { font-size: 14px; }
@@ -212,5 +216,6 @@
   .selected-work-card,
   .drop-project-visual img,
   .tehnotek-project-visual img,
+  .simka-project-visual img,
   .selected-work-link svg { transition: none; }
 }

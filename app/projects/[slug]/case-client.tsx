@@ -80,6 +80,26 @@ const projectCaseDetails = {
       openLabel: "Открыть прототип",
     },
   },
+  "simka-store": {
+    en: {
+      status: "PUBLIC DEMO",
+      note: "A production-oriented telecom commerce platform with a public catalogue demo and complete operational flows behind the storefront.",
+      challengeTitle: "Sell two different fulfilment models through one clear catalogue.",
+      solutionTitle: "Discovery, checkout, fulfilment, and operations in one system.",
+      resultTitle: "A scalable foundation for a real connectivity store.",
+      points: ["Catalogue by country, operator, and product type", "Physical SIM delivery and eSIM fulfilment", "Role-based Telegram operations and analytics"],
+      openLabel: "Open public demo",
+    },
+    ru: {
+      status: "ПУБЛИЧНОЕ ДЕМО",
+      note: "Production-ориентированная e-commerce-платформа для связи с публичной витриной и полноценными операционными сценариями за интерфейсом.",
+      challengeTitle: "Объединить два способа выдачи товара в одном понятном каталоге.",
+      solutionTitle: "Подбор, оформление, выдача и управление в одной системе.",
+      resultTitle: "Масштабируемая основа реального магазина связи.",
+      points: ["Каталог по странам, операторам и типу продукта", "Доставка SIM и выдача eSIM", "Ролевая Telegram-админка и аналитика"],
+      openLabel: "Открыть публичное демо",
+    },
+  },
 } as const;
 
 export function ProjectCaseClient({ project }: { project: Project }) {

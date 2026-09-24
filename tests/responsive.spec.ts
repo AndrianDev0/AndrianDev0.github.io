@@ -66,6 +66,16 @@ test("service photography loads responsively on mobile", async ({ page }) => {
   await expect.poll(async () => images.evaluateAll((elements) => elements.every((element) => (element as HTMLImageElement).naturalWidth > 0))).toBe(true);
   const sources = await images.evaluateAll((elements) => elements.map((element) => (element as HTMLImageElement).currentSrc));
   for (const source of sources) expect(source).toContain("-sm.webp");
+  const layouts = await page.locator(".services .service-item").evaluateAll((elements) => elements.map((element) => {
+    const visual = element.querySelector(".service-visual")!.getBoundingClientRect();
+    const text = element.querySelector(".service-text")!.getBoundingClientRect();
+    const image = element.querySelector("img") as HTMLImageElement;
+    return { gap: text.top - visual.bottom, ratioDifference: Math.abs(visual.width / visual.height - image.naturalWidth / image.naturalHeight) };
+  }));
+  for (const layout of layouts) {
+    expect(layout.gap).toBeGreaterThanOrEqual(0);
+    expect(layout.ratioDifference).toBeLessThan(0.05);
+  }
 });
 
 test("hero project carousel supports buttons and keyboard navigation", async ({ page }) => {
@@ -79,7 +89,7 @@ test("hero project carousel supports buttons and keyboard navigation", async ({ 
     fit: getComputedStyle(image).objectFit,
   }));
   expect(neboImage.src).toContain("og-v2.jpg");
-  expect(neboImage.fit).toBe("cover");
+  expect(neboImage.fit).toBe("contain");
 
   await carousel.getByRole("button", { name: "Следующий проект" }).click();
   await expect(carousel.getByText("DROP / AIR FORCE 1", { exact: true })).toBeVisible();
@@ -88,7 +98,7 @@ test("hero project carousel supports buttons and keyboard navigation", async ({ 
     fit: getComputedStyle(image).objectFit,
   }));
   expect(dropImage.src).toContain("drop-air-force-1.webp");
-  expect(dropImage.fit).toBe("cover");
+  expect(dropImage.fit).toBe("contain");
   const openControl = await carousel.locator(".hero-project-slide.is-active .hero-project-open").evaluate((control) => {
     const icon = control.querySelector("svg") as SVGElement;
     const controlRect = control.getBoundingClientRect();
@@ -120,7 +130,7 @@ test("hero project carousel supports buttons and keyboard navigation", async ({ 
     fit: getComputedStyle(image).objectFit,
   }));
   expect(tehnotekImage.src).toContain("tehnotek-prototype.webp");
-  expect(tehnotekImage.fit).toBe("cover");
+  expect(tehnotekImage.fit).toBe("contain");
   await expect(page.locator(".project-flagship").getByRole("heading", { name: "ТЕХНОТЭК" })).toBeVisible();
   await expect(page.locator(".project-flagship").getByText("ПРОТОТИП", { exact: true })).toBeVisible();
 
@@ -133,7 +143,7 @@ test("hero project carousel supports buttons and keyboard navigation", async ({ 
     fit: getComputedStyle(image).objectFit,
   }));
   expect(simkaImage.src).toContain("simka-store.png");
-  expect(simkaImage.fit).toBe("cover");
+  expect(simkaImage.fit).toBe("contain");
   await expect(page.locator(".project-flagship").getByRole("heading", { name: "SIMKA STORE" })).toBeVisible();
 
   await carousel.getByRole("button", { name: "Показать NEBO BISTRO" }).click();

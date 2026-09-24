@@ -30,16 +30,16 @@
 .hero-project-dots button:focus-visible,.hero-project-arrows button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 @media(min-width:901px){.hero .hero-visual-wrap{height:auto;min-width:0}.hero .hero-layout{column-gap:54px}}
 @media(min-width:1600px){.hero-project-carousel{height:640px;max-width:760px}.hero-project-viewport{height:570px}.hero-project-frame{width:680px;height:540px}}
-@media(max-width:900px){.hero .hero-visual-wrap{height:auto;margin-top:30px}.hero-project-carousel{height:580px;max-width:650px}.hero-project-viewport{height:515px}.hero-project-frame{width:94%;height:505px}}
+@media(max-width:900px){.hero .hero-visual-wrap{height:auto;margin-top:30px}.hero-project-carousel{height:520px;max-width:650px}.hero-project-viewport{height:456px}.hero-project-frame{inset:0 1% auto auto;grid-template-rows:38px auto 68px;width:94%;height:auto}.hero-project-media{aspect-ratio:16/9}.hero-project-image img{object-fit:contain;object-position:center}}
 @media(max-width:600px){
-  .hero-project-carousel{width:100%;height:482px}
-  .hero-project-viewport{height:414px}
+  .hero-project-carousel{width:100%;height:calc(200px + 56.25vw)}
+  .hero-project-viewport{height:calc(132px + 56.25vw)}
   .hero-project-slide{transform:translateX(18px);transition:opacity .28s var(--ease),transform .4s var(--ease)}
-  .hero-project-frame{inset:0;grid-template-rows:38px 264px 108px;width:100%;height:410px;border-color:rgba(129,133,147,.42);border-radius:13px;box-shadow:0 24px 55px -38px rgba(7,8,12,.8)}
+  .hero-project-frame{inset:0;grid-template-rows:38px auto 108px;width:100%;height:auto;border-color:rgba(129,133,147,.42);border-radius:13px;box-shadow:0 24px 55px -38px rgba(7,8,12,.8)}
   .hero-project-top{padding:0 12px;font-size:9px;letter-spacing:.1em}
   .hero-project-top i{width:7px;height:7px}
-  .hero-project-media{width:100%;justify-self:center;overflow:hidden;background:#050506}
-  .hero-project-media img{width:100%;height:100%;object-fit:cover;object-position:center top;filter:none;transform:none}
+  .hero-project-media{width:100%;aspect-ratio:16/9;justify-self:center;overflow:hidden;background:#050506}
+  .hero-project-media img{width:100%;height:100%;object-fit:contain;object-position:center;filter:none;transform:none}
   .hero-project-image-nebo img{object-fit:contain;object-position:center}
   .nebo-proof-direction,.hero-project-media figcaption{display:none}
   .hero-project-footer{padding:0 12px 0 14px;gap:10px}

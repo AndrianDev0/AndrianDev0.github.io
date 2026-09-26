@@ -23,8 +23,10 @@ pnpm vercel-build
 The canonical site is published at https://andriandev0.github.io/ from the
 `AndrianDev0.github.io` repository. The GitHub Pages workflow builds the
 static pages, including the localized case studies, service pages, sitemap,
-and robots.txt. Keep that repository in sync with this source repository
-when publishing changes.
+and robots.txt. Publish the same `main` commit to both repositories. This
+checkout configures `origin` with both push URLs, so `git push origin main`
+updates the source and the Pages site together; other clones need the same
+push configuration or two explicit pushes.
 
 ## Content and settings
 

@@ -5,6 +5,18 @@
   "outputDirectory": "dist-vercel",
   "cleanUrls": true,
   "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "https://andriandev0.github.io/",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "destination": "https://andriandev0.github.io/:path*",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/assets/(.*)",

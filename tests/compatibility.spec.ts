@@ -4,7 +4,7 @@ const languages = [
   {
     code: "ru",
     path: "/",
-    heading: /Создаю цифровые продукты для роста бизнеса/,
+    heading: /Сайты и Telegram-боты для реальных задач/,
     carousel: "Избранные проекты",
     menu: "Открыть меню",
     themeLabel: { light: "Включить тёмную тему", dark: "Включить светлую тему" },
@@ -12,7 +12,7 @@ const languages = [
   {
     code: "en",
     path: "/en",
-    heading: /I build digital products that move businesses forward/,
+    heading: /Websites and Telegram bots for real work/,
     carousel: "Selected projects",
     menu: "Open menu",
     themeLabel: { light: "Switch to dark theme", dark: "Switch to light theme" },
@@ -82,7 +82,7 @@ test("language and theme choices survive real navigation", async ({ page }) => {
   await page.getByRole("button", { name: "EN" }).click();
   await page.waitForURL("**/en#top");
   await expect(page.locator("html")).toHaveAttribute("lang", "en");
-  await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
   expect(await page.evaluate(() => window.scrollY)).toBeLessThan(2);
 
   await page.goto("/en/projects/drop-3d-store", { waitUntil: "networkidle" });
@@ -90,7 +90,7 @@ test("language and theme choices survive real navigation", async ({ page }) => {
   await page.waitForURL("**/projects/drop-3d-store#top");
   await expect(page.locator("html")).toHaveAttribute("lang", "ru");
   await expect(page.getByRole("heading", { level: 1, name: "DROP / AIR FORCE 1" })).toBeVisible();
-  await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
 });
 
 test("budget ranges are localized and a custom amount is sent", async ({ page }) => {

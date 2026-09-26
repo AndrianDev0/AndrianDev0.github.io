@@ -9,7 +9,7 @@ const THEME_KEY = "andrian-dev-theme";
 const ThemeContext = createContext<{ theme: Theme; toggleTheme: () => void } | null>(null);
 
 function readTheme(): Theme {
-  if (typeof document === "undefined") return "light";
+  if (typeof document === "undefined") return "dark";
   return document.documentElement.dataset.theme === "dark" ? "dark" : "light";
 }
 

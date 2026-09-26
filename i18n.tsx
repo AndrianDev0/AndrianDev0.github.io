@@ -12,8 +12,8 @@ const copy = {
     openMenu: "Open menu",
     closeMenu: "Close menu",
     hero: {
-      label: "WEB DEVELOPMENT / TELEGRAM BOTS / AUTOMATION",
-      subtitle: "I build modern websites, Telegram bots, web apps, and automations — from idea and interface to a finished product.",
+      label: "ANDRIAN.DEV / WEB DEVELOPMENT",
+      subtitle: "I design and build websites, Telegram bots and web apps — with clear scope, working features and a launch-ready result.",
       viewWork: "View My Work",
       trust: ["Websites", "Telegram Bots", "Web Apps", "Automation"],
       scroll: "SCROLL TO EXPLORE",
@@ -144,8 +144,8 @@ const copy = {
     openMenu: "Открыть меню",
     closeMenu: "Закрыть меню",
     hero: {
-      label: "ВЕБ-РАЗРАБОТКА / TELEGRAM-БОТЫ / АВТОМАТИЗАЦИЯ",
-      subtitle: "Создаю современные сайты, Telegram-ботов, веб-приложения и автоматизации — от идеи и интерфейса до готового продукта.",
+      label: "ANDRIAN.DEV / РАЗРАБОТКА",
+      subtitle: "Делаю сайты, Telegram-ботов и веб-приложения: от понятной задачи до работающего продукта.",
       viewWork: "Смотреть работы",
       trust: ["Сайты", "Telegram-боты", "Веб-приложения", "Автоматизация"],
       scroll: "ЛИСТАЙТЕ ДАЛЬШЕ",

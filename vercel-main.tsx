@@ -5,6 +5,7 @@ import { SpeedInsights } from "@vercel/speed-insights/react";
 import HomeApp from "./home-app";
 import { LanguageProvider } from "./i18n";
 import "./app/globals.css";
+import "./styles/editorial-refresh.css";
 import { findIndexableRoute, productionOrigin } from "./site-registry";
 import { ThemeProvider } from "./theme";
 

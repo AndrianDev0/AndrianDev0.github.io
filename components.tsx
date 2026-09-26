@@ -157,9 +157,9 @@ export function Hero() {
         <div className="hero-copy">
           <p className="hero-label hero-enter hero-enter-label"><span className="hero-label-dot" />{t.hero.label}</p>
           <h1>
-            <span className="hero-line-mask"><span className="hero-line hero-line-one">{language === "ru" ? <>Создаю <em>цифровые</em></> : <>I build <em>digital</em></>}</span></span>
-            <span className="hero-line-mask"><span className="hero-line hero-line-two">{language === "ru" ? <><em>продукты</em> для</> : <><em>products</em> that move</>}</span></span>
-            <span className="hero-line-mask"><span className="hero-line hero-line-three">{language === "ru" ? "роста бизнеса." : "businesses forward."}</span></span>
+            <span className="hero-line-mask"><span className="hero-line hero-line-one">{language === "ru" ? "Сайты и" : "Websites and"}</span></span>
+            <span className="hero-line-mask"><span className="hero-line hero-line-two">{language === "ru" ? <><em>Telegram-боты</em></> : <><em>Telegram bots</em></>}</span></span>
+            <span className="hero-line-mask"><span className="hero-line hero-line-three">{language === "ru" ? "для реальных задач." : "for real work."}</span></span>
           </h1>
           <p className="hero-subtitle hero-enter hero-enter-subtitle">{t.hero.subtitle}</p>
           <div className="hero-actions hero-enter hero-enter-actions"><a className="button button-primary" href="#contact">{t.startProject} <ArrowRight size={18} /></a><a className="button button-ghost" href="#work">{t.hero.viewWork} <span>↓</span></a></div>

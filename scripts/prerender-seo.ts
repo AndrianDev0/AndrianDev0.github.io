@@ -136,7 +136,7 @@ function homeFallback(language: "ru" | "en") {
     <main>
       <section class="seo-static-hero">
         <span>${ru ? "ВЕБ-РАЗРАБОТКА / TELEGRAM-БОТЫ / АВТОМАТИЗАЦИЯ" : "WEB DEVELOPMENT / TELEGRAM BOTS / AUTOMATION"}</span>
-        <h1>${ru ? "Создаю <em>цифровые продукты</em> для роста бизнеса." : "I build <em>digital products</em> that move businesses forward."}</h1>
+        <h1>${ru ? "Сайты и <em>Telegram-боты</em> для реальных задач." : "Websites and <em>Telegram bots</em> for real work."}</h1>
         <p>${ru ? "Создаю сайты, Telegram-ботов, веб-приложения и автоматизацию для бизнеса — от структуры и интерфейса до интеграций, тестирования и запуска." : "I build modern websites, Telegram bots, web apps, and automations — from structure and interface to integrations, testing, and launch."}</p>
         <div class="seo-static-actions"><a href="#contact">${ru ? "Обсудить проект" : "Start a project"}</a><a href="#work">${ru ? "Смотреть работы" : "View my work"}</a></div>
       </section>
@@ -227,6 +227,9 @@ async function writePage(outDir: string, route: string, html: string) {
   const filePath = path.join(outDir, ...`${route}.html`.split("/").filter(Boolean));
   await mkdir(path.dirname(filePath), { recursive: true });
   await writeFile(filePath, html, "utf8");
+  const directoryIndex = path.join(outDir, ...route.split("/").filter(Boolean), "index.html");
+  await mkdir(path.dirname(directoryIndex), { recursive: true });
+  await writeFile(directoryIndex, html, "utf8");
 }
 
 export async function generateSeoPages(outDir: string) {

@@ -3,6 +3,7 @@ import { siteConfig } from "../site";
 import { LanguageProvider } from "../i18n";
 import { ThemeProvider } from "../theme";
 import "./globals.css";
+import "../styles/editorial-refresh.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -24,7 +25,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="ru" suppressHydrationWarning>
-      <head><script dangerouslySetInnerHTML={{ __html: `try{const t=localStorage.getItem("andrian-dev-theme")||"light";const p=location.pathname.replace(/\\/+$/,"")||"/";const l=p==="/en"||p.startsWith("/en/")?"en":"ru";document.documentElement.dataset.theme=t;document.documentElement.style.colorScheme=t;document.documentElement.dataset.language=l;document.documentElement.lang=l}catch{document.documentElement.dataset.theme="light";document.documentElement.dataset.language="ru"}` }} /></head>
+      <head><script dangerouslySetInnerHTML={{ __html: `try{const t=localStorage.getItem("andrian-dev-theme")||"dark";const p=location.pathname.replace(/\\/+$/,"")||"/";const l=p==="/en"||p.startsWith("/en/")?"en":"ru";document.documentElement.dataset.theme=t;document.documentElement.style.colorScheme=t;document.documentElement.dataset.language=l;document.documentElement.lang=l}catch{document.documentElement.dataset.theme="dark";document.documentElement.dataset.language="ru"}` }} /></head>
       <body><ThemeProvider><LanguageProvider>{children}</LanguageProvider></ThemeProvider></body>
     </html>
   );

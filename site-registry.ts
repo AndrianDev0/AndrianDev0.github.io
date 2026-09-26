@@ -45,7 +45,7 @@ export function normalizeRoutePath(pathname: string) {
 
 export function absoluteSiteUrl(pathname: string) {
   const path = normalizeRoutePath(pathname);
-  return path === "/" ? `${productionOrigin}/` : `${productionOrigin}${path}`;
+  return path === "/" ? `${productionOrigin}/` : `${productionOrigin}${path}/`;
 }
 
 export function serviceRoutePath(slug: string) {
@@ -66,7 +66,7 @@ const homeRoutes: IndexableRoute[] = [
     metadata: {
       title: siteConfig.title,
       description: siteConfig.description,
-      h1: "Создаю цифровые продукты для роста бизнеса.",
+      h1: "Сайты и Telegram-боты для реальных задач.",
       locale: "ru_RU",
     },
     alternates: homeAlternates,
@@ -78,7 +78,7 @@ const homeRoutes: IndexableRoute[] = [
     metadata: {
       title: "Websites, Telegram Bots & Automation — Andrian.Dev",
       description: "Modern websites, Telegram bots, web apps and automation — from structure and interface to integrations, testing and launch.",
-      h1: "I build digital products that move businesses forward.",
+      h1: "Websites and Telegram bots for real work.",
       locale: "en_US",
     },
     alternates: homeAlternates,

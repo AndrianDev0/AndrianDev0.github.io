@@ -1,7 +1,7 @@
 export const siteConfig = {
   name: "Andrian.Dev",
   fullName: "ANDRIAN.DEV",
-  url: "https://andrian-dev-portfolio.vercel.app",
+  url: "https://andriandev0.github.io",
   title: "Разработка сайтов и Telegram-ботов — Andrian.Dev",
   description: "Создаю сайты, Telegram-ботов, веб-приложения и автоматизацию для бизнеса: от структуры и интерфейса до интеграций, тестирования и запуска.",
   telegram: "qweJSq",

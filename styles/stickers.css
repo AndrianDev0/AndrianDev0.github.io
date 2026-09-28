@@ -1,37 +1,15 @@
-.studio-stickers {
-  position: absolute;
-  top: 38px;
-  right: 3%;
-  width: 242px;
-  height: 246px;
-}
-.studio-sticker {
-  position: absolute;
-  display: block;
-  padding: 0;
-  border: 0;
-  background: none;
-  cursor: pointer;
-  transform: rotate(var(--sticker-rotation));
-  transition: transform .26s cubic-bezier(.2,.8,.2,1);
-}
-.studio-sticker svg { display: block; width: 100%; height: 100%; animation: sticker-pop .72s cubic-bezier(.2,.9,.25,1) both; }
-.studio-sticker:hover,
-.studio-sticker:focus-visible { transform: translateY(-7px) rotate(calc(var(--sticker-rotation) + 5deg)) scale(1.05); }
-.studio-sticker:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 28px; }
-.studio-sticker-party { --sticker-rotation: -9deg; z-index: 3; left: 8px; top: 48px; width: 174px; height: 174px; }
-.studio-sticker-byte { --sticker-rotation: 12deg; z-index: 2; right: 0; top: 2px; width: 113px; height: 113px; }
-.studio-sticker-ghost { --sticker-rotation: 8deg; z-index: 1; right: 3px; bottom: 5px; width: 103px; height: 103px; }
-@keyframes sticker-pop { 0%,100% { transform: scale(1) rotate(0); } 35% { transform: scale(1.13) rotate(-7deg); } 65% { transform: scale(.94) rotate(5deg); } }
-
-@media (max-width: 1200px) {
-  .studio-stickers { position: relative; top: auto; right: auto; width: min(100%, 310px); height: 164px; margin: 30px 0 0; }
-  .studio-sticker-party { left: 3px; top: 4px; width: 148px; height: 148px; }
-  .studio-sticker-byte { right: 43px; top: 1px; width: 104px; height: 104px; }
-  .studio-sticker-ghost { right: 14px; bottom: 3px; width: 95px; height: 95px; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .studio-sticker { transition: none; }
-  .studio-sticker:hover, .studio-sticker:focus-visible { transform: rotate(var(--sticker-rotation)); }
-  .studio-sticker svg { animation: none; }
-}
+.studio-sticker-spot{position:absolute;z-index:5;width:112px;aspect-ratio:1;--sticker-rotation:-8deg}
+.studio-sticker-line{position:absolute;top:20%;left:-115%;width:190%;color:#69bca4;pointer-events:none}
+.studio-sticker{position:relative;display:block;width:100%;height:100%;padding:0;border:0;background:none;cursor:pointer;transform:rotate(var(--sticker-rotation))}
+.studio-sticker svg{width:100%;height:100%;animation:sticker-pop .72s cubic-bezier(.2,.9,.25,1) both}
+.studio-sticker:focus-visible{outline:3px solid #69bca4;outline-offset:3px}
+.studio-sticker-hero{top:42%;right:-14%;width:136px}
+.studio-sticker-work{top:28px;right:9px;--sticker-rotation:11deg}
+.services .service-item{position:relative}
+.studio-sticker-services{right:-26px;bottom:-35px;width:104px;--sticker-rotation:-11deg}
+.contact-direct{position:relative}
+.studio-sticker-contact{left:2%;bottom:28px;width:116px;--sticker-rotation:8deg}
+@keyframes sticker-pop{0%,100%{transform:scale(1) rotate(0)}35%{transform:scale(1.13) rotate(-7deg)}65%{transform:scale(.94) rotate(5deg)}}
+@media(max-width:1200px){.studio-sticker-hero{position:relative;top:auto;right:auto;width:116px;margin:24px 8% 0 auto}}
+@media(max-width:900px){.studio-sticker-work{top:auto;right:6px;bottom:12px;width:92px}.studio-sticker-services{right:-5px;bottom:-25px;width:86px}.studio-sticker-contact{position:relative;left:auto;bottom:auto;width:104px;margin:20px auto 0 0}}
+@media(max-width:600px){.studio-sticker-hero{width:99px;margin:16px 9% 0 auto}.studio-sticker-work{right:4px;bottom:5px;width:76px}.studio-sticker-services{right:0;bottom:-20px;width:74px}.studio-sticker-contact{width:92px;margin-top:12px}}

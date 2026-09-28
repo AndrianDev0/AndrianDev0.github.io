@@ -5,11 +5,11 @@ import { useLanguage } from "./i18n";
 
 type StickerKind = "party" | "byte" | "ghost";
 
-const stickers: { kind: StickerKind; ru: string; en: string }[] = [
-  { kind: "party", ru: "Развеселить мятного чудика", en: "Cheer up the mint creature" },
-  { kind: "byte", ru: "Подмигнуть оранжевому чудищу", en: "Wink at the orange creature" },
-  { kind: "ghost", ru: "Напугать дружелюбное привидение", en: "Spook the friendly ghost" },
-];
+const stickers: Record<StickerKind, { ru: string; en: string }> = {
+  party: { ru: "Развеселить мятного чудика", en: "Cheer up the mint creature" },
+  byte: { ru: "Подмигнуть оранжевому чудищу", en: "Wink at the orange creature" },
+  ghost: { ru: "Напугать дружелюбное привидение", en: "Spook the friendly ghost" },
+};
 
 function PartySticker() {
   return (
@@ -61,27 +61,20 @@ function GhostSticker() {
 
 const art = { party: PartySticker, byte: ByteSticker, ghost: GhostSticker };
 
-export function StudioStickers() {
+export function StudioSticker({ kind, place }: { kind: StickerKind; place: "hero" | "work" | "services" | "contact" }) {
   const { language } = useLanguage();
-  const [reaction, setReaction] = useState<{ kind: StickerKind; count: number } | null>(null);
+  const [reaction, setReaction] = useState(0);
+  const Art = art[kind];
 
   return (
-    <div className="studio-stickers">
-      {stickers.map(({ kind, ru, en }) => {
-        const Art = art[kind];
-        const playing = reaction?.kind === kind;
-        return (
-          <button
-            key={kind}
-            type="button"
-            className={`studio-sticker studio-sticker-${kind}`}
-            aria-label={language === "ru" ? ru : en}
-            onClick={() => setReaction((current) => ({ kind, count: (current?.count ?? 0) + 1 }))}
-          >
-            <Art key={playing ? reaction.count : 0} />
-          </button>
-        );
-      })}
+    <div className={`studio-sticker-spot studio-sticker-${place}`}>
+      <svg className="studio-sticker-line" style={place === "contact" ? { left: "55%" } : undefined} viewBox="0 0 190 110" fill="none" aria-hidden="true" focusable="false">
+        <path d="M5 89C39 94 49 31 94 37c34 4 54 52 87 10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeDasharray="2 9" />
+        <path d="m171 49 11-3-4 11" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+      <button type="button" className={`studio-sticker studio-sticker-${kind}`} aria-label={stickers[kind][language]} onClick={() => setReaction((count) => count + 1)}>
+        <Art key={reaction} />
+      </button>
     </div>
   );
 }

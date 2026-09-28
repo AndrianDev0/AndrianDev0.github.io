@@ -11,6 +11,7 @@ import { projectRussian, useLanguage } from "./i18n";
 import { NeboBotFlowVisual, NeboMiniAppVisual, PortfolioHighlightVisual, ProjectVisual } from "./visuals";
 import { ServiceVisual } from "./service-visual";
 import { ShinyText } from "./react-bits";
+import { StudioSticker } from "./studio-stickers";
 import { featuredProjectEvent, type FeaturedProjectId } from "./featured-project";
 import "./styles/services.css";
 import "./styles/selected-work.css";
@@ -91,6 +92,7 @@ export function ProjectsSection() {
               <Reveal className={`project-visual-shell project-visual-reveal${selectedHighlight ? " project-highlight-shell" : ""}`}>
                 {selectedHighlight ? <PortfolioHighlightVisual project={selectedHighlight} context="case" /> : <ProjectVisual project={project} />}
               </Reveal>
+              <StudioSticker kind="byte" place="work" />
             </article>
           </Reveal>
           {selectedProject === "nebo" && <div className="project-layers">
@@ -144,7 +146,7 @@ export function ServicesSection() {
       <div className="container">
         <SectionHeading eyebrow={t.services.eyebrow} title={<>{t.services.titleTop}<br /><span className="soft">{t.services.titleBottom}</span></>} copy={t.services.copy} />
         <div className="services-grid">
-          {services.map((service, index) => <Reveal key={service.id} delay={index * 0.04} className={`service-item service-${index + 1}`}><article><div className="service-number"><span>{service.id}</span><i /></div><div className="service-text"><h3>{t.services.items[index][0]}</h3><p>{t.services.items[index][1]}</p><a className="service-more" href={language === "ru" ? service.href : "#contact"}>{t.services.explore} <ArrowRight aria-hidden="true" size={14} /></a></div><div className="service-visual"><ServiceVisual type={service.visual} /></div></article></Reveal>)}
+          {services.map((service, index) => <Reveal key={service.id} delay={index * 0.04} className={`service-item service-${index + 1}`}><article><div className="service-number"><span>{service.id}</span><i /></div><div className="service-text"><h3>{t.services.items[index][0]}</h3><p>{t.services.items[index][1]}</p><a className="service-more" href={language === "ru" ? service.href : "#contact"}>{t.services.explore} <ArrowRight aria-hidden="true" size={14} /></a></div><div className="service-visual"><ServiceVisual type={service.visual} /></div></article>{index === 1 && <StudioSticker kind="ghost" place="services" />}</Reveal>)}
         </div>
       </div>
     </section>
@@ -243,7 +245,7 @@ export function ContactSection() {
   const { t } = useLanguage();
   const telegramUrl = `https://t.me/${siteConfig.telegram.replace(/^@/, "")}`;
   return (
-    <section id="contact" className="contact section-pad"><div className="contact-orb" /><div className="container"><div className="contact-heading"><p className="eyebrow"><span />{t.contact.eyebrow}</p><Reveal><h2>{t.contact.question}</h2></Reveal><Reveal delay={0.06}><h2 className="outline-line">{t.contact.titleTop}<br /><em>{t.contact.titleAccent}</em></h2></Reveal><p>{t.contact.copy}</p></div><div className="contact-layout"><div className="contact-direct"><span>{t.contact.ready}</span><MagneticButton href={telegramUrl} external className="telegram-button">{t.contact.telegram} <Send size={18} /></MagneticButton><a href={`mailto:${siteConfig.email}`}>{siteConfig.email} <ArrowUpRight size={16} /></a><div className="availability"><i /> {t.contact.available}</div></div><ContactForm /></div></div></section>
+    <section id="contact" className="contact section-pad"><div className="contact-orb" /><div className="container"><div className="contact-heading"><p className="eyebrow"><span />{t.contact.eyebrow}</p><Reveal><h2>{t.contact.question}</h2></Reveal><Reveal delay={0.06}><h2 className="outline-line">{t.contact.titleTop}<br /><em>{t.contact.titleAccent}</em></h2></Reveal><p>{t.contact.copy}</p></div><div className="contact-layout"><div className="contact-direct"><span>{t.contact.ready}</span><MagneticButton href={telegramUrl} external className="telegram-button">{t.contact.telegram} <Send size={18} /></MagneticButton><a href={`mailto:${siteConfig.email}`}>{siteConfig.email} <ArrowUpRight size={16} /></a><div className="availability"><i /> {t.contact.available}</div><StudioSticker kind="party" place="contact" /></div><ContactForm /></div></div></section>
   );
 }
 

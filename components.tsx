@@ -7,7 +7,7 @@ import { siteConfig } from "./site";
 import { submitProjectRequest } from "./submit";
 import { ThemeToggle } from "./theme";
 import { HeroVisual } from "./hero-visual";
-import { StudioStickers } from "./studio-stickers";
+import { StudioSticker } from "./studio-stickers";
 
 export function Reveal({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -165,7 +165,7 @@ export function Hero() {
           <p className="hero-subtitle hero-enter hero-enter-subtitle">{t.hero.subtitle}</p>
           <div className="hero-actions hero-enter hero-enter-actions"><a className="button button-primary" href="#contact">{t.startProject} <ArrowRight size={18} /></a><a className="button button-ghost" href="#work">{t.hero.viewWork} <span>↓</span></a></div>
           <div className="hero-trust hero-enter hero-enter-trust"><span>{t.hero.trust[0]}</span><i /><span>{t.hero.trust[1]}</span><i /><span>{t.hero.trust[2]}</span><i /><span>{t.hero.trust[3]}</span></div>
-          <StudioStickers />
+          <StudioSticker kind="party" place="hero" />
         </div>
         <div className="hero-visual-wrap" ref={visualRef}><HeroVisual /></div>
       </div>

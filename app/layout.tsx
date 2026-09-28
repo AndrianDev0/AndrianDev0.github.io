@@ -4,6 +4,7 @@ import { LanguageProvider } from "../i18n";
 import { ThemeProvider } from "../theme";
 import "./globals.css";
 import "../styles/editorial-refresh.css";
+import "../styles/stickers.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),

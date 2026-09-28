@@ -1,0 +1,37 @@
+.studio-stickers {
+  position: absolute;
+  top: 38px;
+  right: 3%;
+  width: 242px;
+  height: 246px;
+}
+.studio-sticker {
+  position: absolute;
+  display: block;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  transform: rotate(var(--sticker-rotation));
+  transition: transform .26s cubic-bezier(.2,.8,.2,1);
+}
+.studio-sticker svg { display: block; width: 100%; height: 100%; animation: sticker-pop .72s cubic-bezier(.2,.9,.25,1) both; }
+.studio-sticker:hover,
+.studio-sticker:focus-visible { transform: translateY(-7px) rotate(calc(var(--sticker-rotation) + 5deg)) scale(1.05); }
+.studio-sticker:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 28px; }
+.studio-sticker-party { --sticker-rotation: -9deg; z-index: 3; left: 8px; top: 48px; width: 174px; height: 174px; }
+.studio-sticker-byte { --sticker-rotation: 12deg; z-index: 2; right: 0; top: 2px; width: 113px; height: 113px; }
+.studio-sticker-ghost { --sticker-rotation: 8deg; z-index: 1; right: 3px; bottom: 5px; width: 103px; height: 103px; }
+@keyframes sticker-pop { 0%,100% { transform: scale(1) rotate(0); } 35% { transform: scale(1.13) rotate(-7deg); } 65% { transform: scale(.94) rotate(5deg); } }
+
+@media (max-width: 1200px) {
+  .studio-stickers { position: relative; top: auto; right: auto; width: min(100%, 310px); height: 164px; margin: 30px 0 0; }
+  .studio-sticker-party { left: 3px; top: 4px; width: 148px; height: 148px; }
+  .studio-sticker-byte { right: 43px; top: 1px; width: 104px; height: 104px; }
+  .studio-sticker-ghost { right: 14px; bottom: 3px; width: 95px; height: 95px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .studio-sticker { transition: none; }
+  .studio-sticker:hover, .studio-sticker:focus-visible { transform: rotate(var(--sticker-rotation)); }
+  .studio-sticker svg { animation: none; }
+}

@@ -57,6 +57,19 @@ for (const viewport of viewports) {
   });
 }
 
+test("animated stickers stay decorative and respect reduced motion", async ({ page }) => {
+  await page.goto("/", { waitUntil: "networkidle" });
+
+  await expect(page.locator(".sticker-backdrop")).toHaveCount(7);
+  await expect(page.locator(".floating-sticker")).toHaveCount(11);
+  await expect(page.locator(".sticker-backdrop button")).toHaveCount(0);
+
+  const sticker = page.locator(".floating-sticker").first();
+  await expect(sticker).toHaveCSS("animation-name", "sticker-drift");
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await expect(sticker).toHaveCSS("animation-name", "none");
+});
+
 test("service photography loads responsively on mobile", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/", { waitUntil: "networkidle" });

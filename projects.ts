@@ -26,7 +26,7 @@ export type PortfolioHighlight = {
   status: { en: string; ru: string };
   technologies: string[];
   accent: string;
-  visual: "drop" | "tehnotek" | "simka" | "trainer";
+  visual: "drop" | "tehnotek" | "simka";
   liveUrl?: string;
 };
 
@@ -159,24 +159,6 @@ export const portfolioHighlights: PortfolioHighlight[] = [
     accent: "#c8ff45",
     visual: "simka",
     liveUrl: "https://andriandev0.github.io/simka-store/",
-  },
-  {
-    id: "05",
-    slug: "ai-support-trainer",
-    title: "AI SUPPORT / 30",
-    category: {
-      en: "Telegram product architecture",
-      ru: "Проектирование Telegram-продукта",
-    },
-    description: {
-      en: "An MVP structure for a guided 30-day program: interactive diagnosis, paid access, daily scenarios, progress tracking, and an instant-support mode.",
-      ru: "Архитектура MVP для 30-дневной программы: интерактивная диагностика, оплата и доступ, ежедневные сценарии, сохранение прогресса и режим быстрой поддержки.",
-    },
-    highlights: { en: [], ru: [] },
-    status: { en: "MVP IN DESIGN", ru: "MVP В ПРОЕКТИРОВАНИИ" },
-    technologies: ["Telegram Bot", "AI", "Product Flow"],
-    accent: "#61d6b3",
-    visual: "trainer",
   },
 ];
 

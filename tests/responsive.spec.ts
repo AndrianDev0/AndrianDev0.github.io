@@ -70,6 +70,19 @@ test("animated stickers stay decorative and respect reduced motion", async ({ pa
   await expect(sticker).toHaveCSS("animation-name", "none");
 });
 
+test("selected work contains only published cases and fills the final desktop row", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/", { waitUntil: "networkidle" });
+
+  await expect(page.locator(".selected-work-card")).toHaveCount(3);
+  await expect(page.getByText("AI SUPPORT / 30")).toHaveCount(0);
+  const finalCard = page.locator(".selected-work-card").last();
+  const firstCard = page.locator(".selected-work-card").first();
+  const finalWidth = await finalCard.evaluate((element) => element.getBoundingClientRect().width);
+  const firstWidth = await firstCard.evaluate((element) => element.getBoundingClientRect().width);
+  expect(finalWidth).toBeGreaterThan(firstWidth * 1.8);
+});
+
 test("service photography loads responsively on mobile", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/", { waitUntil: "networkidle" });

@@ -12,9 +12,8 @@
 .typing-hands{position:absolute;inset:0;pointer-events:none;z-index:4}
 .typing-arms{position:absolute;width:100%;height:100%;overflow:visible}
 .typing-arms path{fill:none;stroke:var(--text);stroke-width:9;stroke-linecap:round}
-.typing-glove{position:absolute;width:54px;height:61px;transform:translate(-50%,-70%);transition:translate .12s ease}
+.typing-glove{position:absolute;left:0;top:0;width:54px;height:61px;transform-origin:50% 94%;will-change:transform}
 .typing-glove svg{width:100%;height:100%}
-.typing-glove.is-pressing{translate:0 6px}
 .typing-board{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:13px;padding:24px 24px 30px;border:1px solid var(--line);border-radius:22px;background:var(--bg-elevated);box-shadow:0 9px 0 var(--line),0 18px 28px #00000020}
 .typing-key{--key-bg:#323732;--key-base:#1d211d;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;min-width:0;min-height:110px;padding:14px 6px;border:1px solid #ffffff30;border-radius:12px;background:linear-gradient(150deg,#ffffff13,transparent 65%),var(--key-bg);box-shadow:0 6px 0 var(--key-base),inset 0 1px 0 #ffffff30;color:#fff;font-size:12px;font-weight:550;line-height:1.4;cursor:pointer;touch-action:manipulation;transition:transform .12s ease,box-shadow .12s ease}
 .typing-key::before{content:"";position:absolute;inset:4px 4px 7px;border:1px solid #ffffff12;border-radius:8px;pointer-events:none}
@@ -24,7 +23,9 @@
 .typing-key-1,.typing-key-3,.typing-key-4,.typing-key-8,.typing-key-10{--key-bg:#205d7b;--key-base:#10374c}
 .typing-key-6,.typing-key-11{--key-bg:#326447;--key-base:#193b28}
 .typing-key.is-selected{border-color:#ffffffa6}
-.typing-key.is-down,.typing-key:active{transform:translateY(5px);box-shadow:0 1px 0 var(--key-base),inset 0 1px 0 #ffffff30}
+.typing-key{transform:translateY(calc(var(--press-depth,0) * 5px));box-shadow:0 calc(6px - var(--press-depth,0) * 5px) 0 var(--key-base),inset 0 1px 0 #ffffff30}
+.typing-scene[data-running="true"] .typing-key{transition:none}
+.typing-key:active{transform:translateY(5px);box-shadow:0 1px 0 var(--key-base),inset 0 1px 0 #ffffff30}
 .typing-key:focus-visible,.typing-toolbar button:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
 .typing-caption{margin-top:28px;min-height:28px}.typing-caption strong{color:var(--text);font-weight:550}
 @media(max-width:700px){.typing-board{grid-template-columns:repeat(3,minmax(0,1fr));padding:16px 12px 22px;gap:12px 9px}.typing-key{min-height:95px;font-size:11px}.typing-key-symbol{font-size:23px}.typing-caption{font-size:12px;align-items:flex-start;flex-direction:column;gap:6px}.typing-glove{width:44px;height:50px}.typing-arms path{stroke-width:7}}

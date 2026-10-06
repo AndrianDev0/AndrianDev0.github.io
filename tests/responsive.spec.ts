@@ -36,10 +36,10 @@ for (const viewport of viewports) {
       expect(card.right).toBeLessThanOrEqual(layout.viewport + 1);
       expect(card.height).toBeGreaterThan(300);
     }
-    if (viewport.width > 900) {
+    if (viewport.width > 1100) {
       expect(Math.abs(layout.cards[0].top - layout.cards[1].top)).toBeLessThan(1);
       expect(Math.abs(layout.cards[2].top - layout.cards[3].top)).toBeLessThan(1);
-      expect(layout.cards[0].width).toBeGreaterThan(layout.cards[1].width);
+      expect(Math.abs(layout.cards[0].width - layout.cards[1].width)).toBeLessThan(1);
     } else {
       expect(layout.cards[1].top).toBeGreaterThan(layout.cards[0].top);
     }
@@ -128,6 +128,25 @@ test("service photography loads responsively on mobile", async ({ page }) => {
   }));
   for (const layout of layouts) {
     expect(layout.gap).toBeGreaterThanOrEqual(0);
+  }
+});
+
+test("desktop service copy never overlaps the project visual", async ({ page }) => {
+  for (const viewport of [{ width: 1024, height: 900 }, { width: 1440, height: 900 }]) {
+    await page.setViewportSize(viewport);
+    await page.goto("/", { waitUntil: "networkidle" });
+    const telegramCard = page.locator(".service-2 article");
+    const layout = await telegramCard.evaluate((element) => {
+      const text = element.querySelector(".service-text")!.getBoundingClientRect();
+      const visual = element.querySelector(".service-visual")!.getBoundingClientRect();
+      const image = element.querySelector("img")!;
+      return {
+        gap: visual.left - text.right,
+        objectPosition: getComputedStyle(image).objectPosition,
+      };
+    });
+    expect(layout.gap).toBeGreaterThanOrEqual(16);
+    expect(layout.objectPosition).toBe("50% 0%");
   }
 });
 

@@ -57,17 +57,43 @@ for (const viewport of viewports) {
   });
 }
 
-test("animated stickers stay decorative and respect reduced motion", async ({ page }) => {
+test("Telegram emoji stay decorative and respect reduced motion", async ({ page }) => {
   await page.goto("/", { waitUntil: "networkidle" });
 
-  await expect(page.locator(".sticker-backdrop")).toHaveCount(7);
-  await expect(page.locator(".floating-sticker")).toHaveCount(11);
+  await expect(page.locator(".sticker-backdrop")).toHaveCount(4);
+  await expect(page.locator(".floating-sticker")).toHaveCount(4);
   await expect(page.locator(".sticker-backdrop button")).toHaveCount(0);
 
-  const sticker = page.locator(".floating-sticker").first();
-  await expect(sticker).toHaveCSS("animation-name", "sticker-drift");
+  const sticker = page.locator(".sticker-backdrop-hero");
+  await expect(sticker).toHaveAttribute("data-state", "ready");
+  await expect(sticker.locator("svg")).toBeVisible();
+  const workEmoji = page.locator(".sticker-backdrop-work");
+  await workEmoji.scrollIntoViewIfNeeded();
+  await expect(workEmoji).toHaveAttribute("data-active", "true");
+  await expect(sticker).toHaveAttribute("data-active", "false");
+  await expect(workEmoji.locator("svg")).toBeVisible();
   await page.emulateMedia({ reducedMotion: "reduce" });
-  await expect(sticker).toHaveCSS("animation-name", "none");
+  await expect(workEmoji).toHaveAttribute("data-active", "false");
+  const stillFrame = await workEmoji.locator("svg").innerHTML();
+  await page.waitForTimeout(150);
+  expect(await workEmoji.locator("svg").innerHTML()).toBe(stillFrame);
+  await page.setViewportSize({ width: 320, height: 700 });
+  for (const scene of ["hero", "work", "contact"]) {
+    const artwork = page.locator(`.sticker-backdrop-${scene} .floating-sticker`);
+    await artwork.scrollIntoViewIfNeeded();
+    await expect(artwork.locator("svg")).toBeVisible();
+    const placement = await artwork.evaluate((element) => {
+      const section = element.closest("section")!;
+      const image = element.querySelector("svg")!.getBoundingClientRect();
+      const labelElement = section.querySelector(".hero-label, .eyebrow")!;
+      const text = [...labelElement.childNodes].find((node) => node.nodeType === Node.TEXT_NODE && node.textContent?.trim())!;
+      const range = document.createRange();
+      range.selectNode(text);
+      const label = range.getBoundingClientRect();
+      return { overlap: Math.min(image.right, label.right) > Math.max(image.left, label.left) && Math.min(image.bottom, label.bottom) > Math.max(image.top, label.top) };
+    });
+    expect(placement.overlap, `${scene} artwork must not cover its section label`).toBe(false);
+  }
 });
 
 test("selected work contains only published cases and fills the final desktop row", async ({ page }) => {
@@ -88,19 +114,20 @@ test("service photography loads responsively on mobile", async ({ page }) => {
   await page.goto("/", { waitUntil: "networkidle" });
   await page.locator("#services").scrollIntoViewIfNeeded();
   const images = page.locator(".service-photo img");
-  await expect(images).toHaveCount(4);
+  await expect(images).toHaveCount(3);
   await expect.poll(async () => images.evaluateAll((elements) => elements.every((element) => (element as HTMLImageElement).naturalWidth > 0))).toBe(true);
   const sources = await images.evaluateAll((elements) => elements.map((element) => (element as HTMLImageElement).currentSrc));
-  for (const source of sources) expect(source).toContain("-sm.webp");
+  expect(sources[0]).toContain("tehnotek-prototype.webp");
+  expect(sources[1]).toContain("bot-welcome.webp");
+  expect(sources[2]).toContain("simka-store.png");
+  await expect(page.locator(".service-flow")).toHaveCount(1);
   const layouts = await page.locator(".services .service-item").evaluateAll((elements) => elements.map((element) => {
     const visual = element.querySelector(".service-visual")!.getBoundingClientRect();
     const text = element.querySelector(".service-text")!.getBoundingClientRect();
-    const image = element.querySelector("img") as HTMLImageElement;
-    return { gap: text.top - visual.bottom, ratioDifference: Math.abs(visual.width / visual.height - image.naturalWidth / image.naturalHeight) };
+    return { gap: text.top - visual.bottom };
   }));
   for (const layout of layouts) {
     expect(layout.gap).toBeGreaterThanOrEqual(0);
-    expect(layout.ratioDifference).toBeLessThan(0.05);
   }
 });
 
@@ -110,12 +137,12 @@ test("hero project carousel supports buttons and keyboard navigation", async ({ 
 
   const carousel = page.getByRole("region", { name: "Избранные проекты" });
   await expect(carousel.getByText("NEBO BISTRO", { exact: true })).toBeVisible();
-  const neboImage = await carousel.locator(".hero-project-slide.is-active img").evaluate((image) => ({
-    src: (image as HTMLImageElement).currentSrc,
-    fit: getComputedStyle(image).objectFit,
-  }));
-  expect(neboImage.src).toContain("og-v2.jpg");
-  expect(neboImage.fit).toBe("contain");
+  const neboImages = await carousel.locator(".hero-project-slide.is-active img").evaluateAll((images) =>
+    images.map((image) => (image as HTMLImageElement).currentSrc),
+  );
+  expect(neboImages).toHaveLength(2);
+  expect(neboImages[0]).toContain("bot-welcome.webp");
+  expect(neboImages[1]).toContain("prize-wheel.webp");
 
   await carousel.getByRole("button", { name: "Следующий проект" }).click();
   await expect(carousel.getByText("DROP / AIR FORCE 1", { exact: true })).toBeVisible();
@@ -216,7 +243,8 @@ for (const projectCase of [
     });
     expect(caseVisual.image).toContain(projectCase.image);
     expect(caseVisual.width).toBeGreaterThan(330);
-    expect(caseVisual.height / caseVisual.width).toBeLessThan(0.65);
+    expect(caseVisual.height / caseVisual.width).toBeGreaterThan(1.5);
+    expect(caseVisual.height / caseVisual.width).toBeLessThan(3);
     const titleToken = projectCase.slug === "drop-3d-store" ? "DROP" : projectCase.slug === "tehnotek-prototype" ? "ТЕХНОТЭК" : "SIMKA";
     await expect(page).toHaveTitle(new RegExp(titleToken, "i"));
   });

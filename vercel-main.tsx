@@ -57,7 +57,7 @@ const isProductionHost = window.location.origin === productionOrigin;
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ThemeProvider>
-      <LanguageProvider>
+      <LanguageProvider initialLanguage={/^\/en(?:\/|$)/.test(window.location.pathname) ? "en" : "ru"}>
         <VercelApp />
         <ProductionMonitoring />
       </LanguageProvider>

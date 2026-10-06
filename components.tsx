@@ -108,56 +108,16 @@ export { HeroVisual } from "./hero-visual";
 
 export function Hero() {
   const { language, t } = useLanguage();
-  const ref = useRef<HTMLElement>(null);
-  const visualRef = useRef<HTMLDivElement>(null);
-  const cueRef = useRef<HTMLAnchorElement>(null);
-
-  useEffect(() => {
-    const section = ref.current;
-    const visual = visualRef.current;
-    const cue = cueRef.current;
-    if (!section || !visual || !cue) return;
-
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    let frame = 0;
-    const paint = () => {
-      const bounds = section.getBoundingClientRect();
-      const travel = Math.max(bounds.height - window.innerHeight * 0.25, 1);
-      const progress = Math.min(1, Math.max(0, -bounds.top / travel));
-      if (window.innerWidth > 900 && !reducedMotion.matches) {
-        const opacity = progress <= 0.15 ? 1 : Math.max(0, 1 - (progress - 0.15) / 0.7);
-        visual.style.transform = `translate3d(0, ${progress * 24}px, 0)`;
-        visual.style.opacity = String(opacity);
-        cue.style.opacity = String(Math.max(0, 1 - progress / 0.25));
-      } else {
-        visual.style.removeProperty("transform");
-        visual.style.removeProperty("opacity");
-        cue.style.removeProperty("opacity");
-      }
-      frame = 0;
-    };
-    const schedule = () => {
-      if (!frame) frame = window.requestAnimationFrame(paint);
-    };
-    paint();
-    window.addEventListener("scroll", schedule, { passive: true });
-    window.addEventListener("resize", schedule);
-    reducedMotion.addEventListener("change", schedule);
-    return () => {
-      window.removeEventListener("scroll", schedule);
-      window.removeEventListener("resize", schedule);
-      reducedMotion.removeEventListener("change", schedule);
-      if (frame) window.cancelAnimationFrame(frame);
-    };
-  }, []);
 
   return (
-    <section id="top" className="hero" ref={ref}>
+    <section id="top" className="hero">
       <div className="hero-noise" />
-      <StickerBackdrop scene="hero" />
       <div className="container hero-layout">
         <div className="hero-copy">
+          <div className="hero-intro">
           <p className="hero-label hero-enter hero-enter-label"><span className="hero-label-dot" />{t.hero.label}</p>
+          <StickerBackdrop scene="hero" />
+          </div>
           <h1>
             <span className="hero-line-mask"><span className="hero-line hero-line-one">{language === "ru" ? "Сайты и" : "Websites and"}</span></span>
             <span className="hero-line-mask"><span className="hero-line hero-line-two">{language === "ru" ? <><em>Telegram-боты</em></> : <><em>Telegram bots</em></>}</span></span>
@@ -167,9 +127,9 @@ export function Hero() {
           <div className="hero-actions hero-enter hero-enter-actions"><a className="button button-primary" href="#contact">{t.startProject} <ArrowRight size={18} /></a><a className="button button-ghost" href="#work">{t.hero.viewWork} <span>↓</span></a></div>
           <div className="hero-trust hero-enter hero-enter-trust"><span>{t.hero.trust[0]}</span><i /><span>{t.hero.trust[1]}</span><i /><span>{t.hero.trust[2]}</span><i /><span>{t.hero.trust[3]}</span></div>
         </div>
-        <div className="hero-visual-wrap" ref={visualRef}><HeroVisual /></div>
+        <div className="hero-visual-wrap"><HeroVisual /></div>
       </div>
-      <a className="scroll-cue" href="#work" ref={cueRef}><span>{t.hero.scroll}</span><ArrowDown aria-hidden="true" size={15} /></a>
+      <a className="scroll-cue" href="#work"><span>{t.hero.scroll}</span><ArrowDown aria-hidden="true" size={15} /></a>
     </section>
   );
 }

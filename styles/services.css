@@ -36,9 +36,22 @@
 .service-photo::after{content:"";position:absolute;z-index:1;inset:0;background:linear-gradient(180deg,rgba(5,7,11,.04) 32%,rgba(5,7,11,.78) 100%)}
 .service-photo img{display:block;width:100%;height:100%;object-fit:cover;filter:saturate(.72) contrast(1.06);opacity:.9;transition:transform .7s var(--ease),filter .35s var(--ease)}
 .service-item article:hover .service-photo img{transform:scale(1.025);filter:saturate(.95) contrast(1.05)}
-.service-photo-label,.service-photo-index{position:absolute;z-index:2;color:#edf0f7;font:600 7px var(--font-geist-mono);letter-spacing:.14em}
+.service-photo-label,.service-photo-index{position:absolute;z-index:2;color:#edf0f7;font:600 10px var(--font-geist-mono);letter-spacing:.12em}
 .service-photo-label{left:14px;bottom:13px}.service-photo-index{right:13px;top:12px;color:rgba(237,240,247,.68)}
 .service-photo-chat img{object-position:center 56%}.service-photo-dashboard img{object-position:center}.service-photo-nodes img{object-position:43% center}
+.service-photo-browser,.service-photo-dashboard{background:#151b1a}
+.service-photo-browser img,.service-photo-dashboard img{object-fit:contain;padding:12px}
+.service-photo-chat img{object-fit:cover;object-position:center 28%}
+.service-photo::after{background:linear-gradient(180deg,transparent 70%,rgba(0,0,0,.78))}
+.service-flow{position:relative;display:flex;flex-direction:column;justify-content:space-between;width:100%;height:100%;overflow:hidden;padding:18px;background:radial-gradient(circle at 54% 54%,rgba(142,219,194,.12),transparent 42%),#111a17;border:1px solid var(--line)}
+.service-flow::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(142,219,194,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(142,219,194,.07) 1px,transparent 1px);background-size:30px 30px;mask-image:linear-gradient(90deg,transparent,#000 25%,#000 75%,transparent)}
+.service-flow-kicker,.service-flow-caption{position:relative;color:#9ecab9;font:600 9px/1.4 var(--font-geist-mono);letter-spacing:.12em}
+.service-flow-caption{color:#c7d6ce;letter-spacing:0;text-transform:none}
+.service-flow-track{position:relative;display:flex;align-items:center;justify-content:center;gap:8px}
+.service-flow-track span{display:grid;place-items:center;min-width:54px;min-height:46px;padding:8px;border:1px solid rgba(142,219,194,.45);border-radius:8px;background:#192521;color:#f0f5ee;font-size:11px;font-weight:650}
+.service-flow-track span:nth-of-type(2){background:var(--accent);color:var(--accent-ink)}
+.service-flow-track i{flex:1;height:1px;min-width:12px;max-width:36px;background:var(--accent)}
+.service-flow-track i::after{content:"";display:block;width:5px;height:5px;margin-left:auto;border-top:1px solid var(--accent);border-right:1px solid var(--accent);transform:translateY(-2px) rotate(45deg)}
 [data-theme="light"] .services .service-item article{background:transparent;box-shadow:none}
 [data-theme="light"] .services .service-item article:hover{border-color:var(--line);background:rgba(255,255,255,.48);box-shadow:none}
 [data-theme="light"] .service-photo{border-color:rgba(16,20,29,.14);box-shadow:0 18px 38px rgba(30,39,62,.12)}
@@ -62,11 +75,12 @@
   .services .service-item article{display:grid;grid-template-rows:auto auto auto;height:auto;padding:20px}
   .services .service-number{width:100%}
   .services .service-visual{position:relative;grid-row:2;left:auto;right:auto;top:auto;bottom:auto;width:100%;height:auto;aspect-ratio:3/2;margin-top:18px}
-  .service-photo-label,.service-photo-index{font-size:8px}
+  .service-photo-label,.service-photo-index{font-size:10px}
   .services .service-text{position:relative;grid-row:3;left:auto;right:auto;bottom:auto;max-width:none;padding-top:24px}
   .services .service-text h3{font-size:28px}
   .services .service-text p{max-width:100%;margin:11px 0 6px;color:var(--muted);font-size:13px;line-height:1.5}
   .services .service-more{font-size:9px}
+  .service-photo-browser img,.service-photo-dashboard img{padding:0}
 }
 @media(hover:none){.services .service-item article:active{background:rgba(126,142,230,.045)}}
 @media(prefers-reduced-motion:reduce){.services .service-item article,.services .service-more svg,.service-photo img{transition:none}}

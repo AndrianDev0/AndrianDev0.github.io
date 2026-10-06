@@ -209,3 +209,74 @@
 @media (prefers-reduced-motion: reduce) {
   .hero-project-slide, .selected-work-card, .service-photo img { transition: none; }
 }
+
+/* Put a real project beside the offer instead of after a full-screen gap. */
+@media (min-width: 901px) {
+  .hero, [data-theme="light"] .hero { padding: 148px 0 76px; }
+  .hero-layout { display: grid; grid-template-columns: minmax(0, 1.06fr) minmax(0, .94fr); align-items: center; gap: clamp(28px, 4vw, 62px); }
+  .hero-copy { max-width: none; }
+  .hero h1, [data-language="ru"] .hero h1 { font-size: clamp(52px, 4.8vw, 72px); }
+  .hero-subtitle { max-width: 540px; }
+  .hero-project-carousel { width: 100%; height: 490px; max-width: none; }
+  .hero-project-viewport { height: 430px; }
+  .hero-project-frame { grid-template-rows: 38px minmax(0, 1fr) 76px; width: 100%; height: 430px; border-radius: 16px; }
+  .hero-project-footer strong { font-size: 18px; }
+  .hero-project-footer > div span { font-size: 11px; }
+  .hero-project-open { font-size: 11px; }
+  .hero-project-top { font-size: 9px; }
+  .hero-project-controls { min-height: 50px; font-size: 10px; }
+}
+
+@media (min-width: 1200px) {
+  .hero > .hero-layout { width: min(calc(100% - 112px), 1600px); column-gap: clamp(56px, 5vw, 96px); }
+  .hero h1, [data-language="ru"] .hero h1 { font-size: clamp(58px, 4.6vw, 80px); }
+  .hero-subtitle { max-width: 610px; }
+}
+
+/* Project evidence should read louder than UI chrome. */
+.project-highlights { color: var(--muted); font-size: 13px; }
+.selected-work-copy > p:nth-of-type(2) { color: var(--muted); font-size: 14px; }
+.selected-work-topline, .selected-work-copy > p:first-child { font-size: 10px; }
+.selected-work-link { color: var(--text); font-size: 13px; }
+.services .service-text p { color: var(--muted); font-size: 13px; }
+.services .service-more { color: var(--accent); font-size: 11px; }
+
+/* Six steps, two concise rows: the work stays the centre of the page. */
+.timeline { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-left: 0; border-left: 1px solid var(--line); }
+.timeline-line, .timeline-dot, .timeline-phase { display: none; }
+.timeline-step { min-height: 186px; display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start; padding: 26px; border-right: 1px solid var(--line); }
+.timeline-index { color: var(--accent); font-size: 11px; }
+.timeline-step h3 { margin: 22px 0 10px; font-size: 24px; }
+.timeline-step p { color: var(--muted); font-size: 13px; }
+
+/* One accent and legible form labels instead of the old violet outline. */
+.contact-heading h2 { font-size: clamp(50px, 6vw, 82px); line-height: 1.02; }
+.contact-heading .outline-line { color: var(--text); }
+.contact-heading h2 em, [data-theme="light"] .contact-heading h2 em { color: var(--accent); -webkit-text-stroke: 0; }
+.contact-layout { margin-top: 72px; }
+.contact-direct > span, .availability { color: var(--muted); font-size: 11px; }
+.telegram-button { color: var(--accent-ink); background: var(--accent); box-shadow: none; font-size: 14px; }
+.telegram-button:hover { box-shadow: 0 10px 28px var(--accent-glow); }
+.contact-form label { color: var(--muted); font-size: 12px; letter-spacing: .02em; }
+.contact-form input, .contact-form textarea, .contact-form select { color: var(--text); background: var(--surface-soft); font-size: 14px; }
+.contact-form input::placeholder, .contact-form textarea::placeholder { color: var(--muted-2); }
+.contact-form input:focus, .contact-form textarea:focus, .contact-form select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
+.submit-button { color: var(--accent-ink); background: var(--accent); font-size: 14px; }
+
+@media (max-width: 900px) {
+  .timeline { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .hero-layout { gap: 42px; }
+}
+@media (max-width: 600px) {
+  .hero-layout { gap: 32px; }
+  .hero { padding-bottom: 44px; }
+  .hero-project-carousel { height: calc(200px + 56.25vw); }
+  .timeline { display: block; border-left: 0; }
+  .timeline-step { min-height: 0; display: grid; grid-template-columns: 34px 1fr; padding: 22px 0; border-right: 0; }
+  .timeline-step h3 { margin: 0 0 7px; font-size: 21px; }
+  .timeline-step p { font-size: 13px; }
+  .contact-heading h2 { font-size: clamp(39px, 10vw, 52px); }
+  .contact-heading .outline-line { margin-top: 18px; }
+  .contact-layout { margin-top: 55px; }
+  .services .service-text p { font-size: 14px; }
+}

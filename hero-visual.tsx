@@ -4,6 +4,8 @@ import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
 import { useEffect, useRef, useState, type PointerEvent as ReactPointerEvent } from "react";
 import { useLanguage } from "./i18n";
 import { selectFeaturedProject } from "./featured-project";
+import { heroProjectDetails } from "./hero-project-details";
+import { ProjectIcon, technologyIcons, technologyLinks } from "./project-icon";
 import "./styles/hero-studio.css";
 
 const heroProjects = [
@@ -16,8 +18,16 @@ const heroProjects = [
 function ProjectMedia({ id, ru, active }: { id: (typeof heroProjects)[number]["id"]; ru: boolean; active: boolean }) {
   if (id === "nebo") {
     return (
-      <div className="hero-project-media hero-project-image hero-project-image-nebo">
-        <img src="/og-v2.jpg" alt={ru ? "Презентация Telegram-бота и Mini App Nebo Bistro" : "Nebo Bistro Telegram bot and Mini App presentation"} width="1200" height="630" loading={active ? "eager" : "lazy"} fetchPriority={active ? "high" : "auto"} decoding="async" />
+      <div className="hero-project-media hero-project-media-nebo">
+        <figure className="nebo-proof-bot">
+          <img src="/nebo/case/bot-welcome.webp" alt={ru ? "Реальный экран приветствия бота Nebo Bistro" : "Real Nebo Bistro bot welcome screen"} width="900" height="1956" loading={active ? "eager" : "lazy"} fetchPriority={active ? "high" : "auto"} decoding="async" />
+          <figcaption>01 / TELEGRAM BOT</figcaption>
+        </figure>
+        <figure className="nebo-proof-app">
+          <img src="/nebo/case/prize-wheel.webp" alt={ru ? "Реальный экран Mini App с колесом призов" : "Real prize-wheel Mini App screen"} width="900" height="1956" loading={active ? "eager" : "lazy"} fetchPriority={active ? "high" : "auto"} decoding="async" />
+          <figcaption>02 / MINI APP</figcaption>
+        </figure>
+        <span className="nebo-proof-direction" aria-hidden="true"><ArrowRight size={16} /></span>
       </div>
     );
   }
@@ -38,6 +48,7 @@ export function HeroVisual() {
   const ru = language === "ru";
   const [active, setActive] = useState(0);
   const pointerStart = useRef<{ x: number; y: number } | null>(null);
+  const suppressClick = useRef(false);
   const total = heroProjects.length;
   const move = (direction: number) => setActive((current) => (current + direction + total) % total);
 
@@ -46,6 +57,7 @@ export function HeroVisual() {
   }, [active]);
 
   const onPointerDown = (event: ReactPointerEvent<HTMLDivElement>) => {
+    suppressClick.current = false;
     pointerStart.current = { x: event.clientX, y: event.clientY };
   };
   const onPointerUp = (event: ReactPointerEvent<HTMLDivElement>) => {
@@ -54,7 +66,10 @@ export function HeroVisual() {
     if (!start) return;
     const dx = event.clientX - start.x;
     const dy = event.clientY - start.y;
-    if (Math.abs(dx) > 46 && Math.abs(dx) > Math.abs(dy)) move(dx < 0 ? 1 : -1);
+    if (Math.abs(dx) > 46 && Math.abs(dx) > Math.abs(dy)) {
+      suppressClick.current = true;
+      move(dx < 0 ? 1 : -1);
+    }
   };
 
   return (
@@ -64,14 +79,23 @@ export function HeroVisual() {
       aria-label={ru ? "Избранные проекты" : "Selected projects"}
       tabIndex={0}
       onKeyDown={(event) => {
+        if (event.key === "ArrowLeft" || event.key === "ArrowRight") event.preventDefault();
         if (event.key === "ArrowLeft") move(-1);
         if (event.key === "ArrowRight") move(1);
       }}
-      onPointerDown={onPointerDown}
-      onPointerUp={onPointerUp}
-      onPointerCancel={() => { pointerStart.current = null; }}
     >
-      <div className="hero-project-viewport" aria-live="polite">
+      <div className="hero-project-viewport"
+        onDragStart={(event) => event.preventDefault()}
+        onPointerDown={onPointerDown}
+        onPointerUp={onPointerUp}
+        onPointerCancel={() => { pointerStart.current = null; }}
+        onClickCapture={(event) => {
+          if (suppressClick.current) {
+            event.preventDefault();
+            suppressClick.current = false;
+          }
+        }}
+      >
         {heroProjects.map((project, index) => {
           const isActive = index === active;
           const projectHref = !project.external && language === "en" ? `/en${project.href}` : project.href;
@@ -102,6 +126,40 @@ export function HeroVisual() {
           <button type="button" onClick={() => move(-1)} aria-label={ru ? "Предыдущий проект" : "Previous project"}><ArrowLeft aria-hidden="true" size={17} /></button>
           <button type="button" onClick={() => move(1)} aria-label={ru ? "Следующий проект" : "Next project"}><ArrowRight aria-hidden="true" size={17} /></button>
         </div>
+      </div>
+      <div className="hero-project-details" aria-live="polite" aria-atomic="true">
+        {heroProjects.map((project, index) => {
+          const details = heroProjectDetails[project.id];
+          const copy = details[ru ? "ru" : "en"];
+          return (
+            <div key={project.id} className={`hero-project-detail${index === active ? " is-active" : ""}`} aria-hidden={index !== active} data-project={project.id}>
+              <span className="sr-only">{project.title}. </span>
+              <dl>
+                <div className="hero-project-brief">
+                  <dt><span className="hero-detail-icon"><ProjectIcon name={details.icon} /></span>{ru ? "Задача проекта" : "The brief"}</dt>
+                  <dd>{copy.task}</dd>
+                </div>
+                <div className="hero-project-delivered">
+                  <dt><ProjectIcon name="tools" />{ru ? "Что сделано" : "The work"}</dt>
+                  <dd>{copy.delivered}</dd>
+                </div>
+              </dl>
+              <div className="hero-project-stack">
+                <span>{ru ? "Технологии" : "Technologies"}</span>
+                <ul aria-label={ru ? "Технологии проекта" : "Project technologies"}>
+                  {details.tech.map((technology) => <li key={technology}>
+                    <a className={`stack-key stack-key-${technologyIcons[technology]}`} href={technologyLinks[technology]}
+                      target="_blank" rel="noopener noreferrer" tabIndex={index === active ? 0 : -1}
+                      aria-label={`${technology}: ${ru ? "официальный сайт, новая вкладка" : "official website, new tab"}`}>
+                      <ProjectIcon name={technologyIcons[technology]} category="stack" />
+                      <span className="stack-key-label">{technology}</span>
+                    </a>
+                  </li>)}
+                </ul>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </section>
   );

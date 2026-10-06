@@ -1,3 +1,5 @@
+"use client";
+
 import { ArrowRight, ArrowUpRight, Check, ExternalLink } from "lucide-react";
 import { useEffect } from "react";
 import { estimateTelegramUrl, siteConfig } from "./site";

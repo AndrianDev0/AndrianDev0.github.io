@@ -2,7 +2,8 @@
 
 import { ArrowRight, ArrowUpRight, CircleDot, Code2, Layers3, MoveUpRight, Send, Sparkles } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { benefits, processSteps, services, technologies } from "./content";
+import { benefits, processSteps, services } from "./content";
+import { TechKeyboard } from "./tech-keyboard";
 import { metrics, siteConfig } from "./site";
 import { portfolioHighlights, projectFacets, projects } from "./projects";
 import { ContactForm, Reveal, SectionHeading } from "./components";
@@ -60,9 +61,11 @@ export function ProjectsSection() {
 
   return (
     <section id="work" className="projects section-pad">
-      <StickerBackdrop scene="work" />
       <div className="container">
+        <div className="work-heading">
         <SectionHeading eyebrow={t.projects.eyebrow} title={<>{t.projects.titleTop}<br /><span className="soft">{t.projects.titleBottom}</span></>} copy={t.projects.copy} />
+        <StickerBackdrop scene="work" />
+        </div>
         <div className="project-list project-list-single">
           <Reveal className="project-reveal">
             <article className={`project-card project-${selectedHighlight ? "website" : project.kind} project-flagship project-detail-${selectedProject}`} style={{ "--project-accent": detail.accent } as React.CSSProperties} aria-live="polite">
@@ -143,11 +146,10 @@ export function ServicesSection() {
   const { language, t } = useLanguage();
   return (
     <section id="services" className="services section-pad">
-      <StickerBackdrop scene="services" />
       <div className="container">
         <SectionHeading eyebrow={t.services.eyebrow} title={<>{t.services.titleTop}<br /><span className="soft">{t.services.titleBottom}</span></>} copy={t.services.copy} />
         <div className="services-grid">
-          {services.map((service, index) => <Reveal key={service.id} delay={index * 0.04} className={`service-item service-${index + 1}`}><article><div className="service-number"><span>{service.id}</span><i /></div><div className="service-text"><h3>{t.services.items[index][0]}</h3><p>{t.services.items[index][1]}</p><a className="service-more" href={language === "ru" ? service.href : "#contact"}>{t.services.explore} <ArrowRight aria-hidden="true" size={14} /></a></div><div className="service-visual"><ServiceVisual type={service.visual} /></div></article></Reveal>)}
+          {services.map((service, index) => <Reveal key={service.id} delay={index * 0.04} className={`service-item service-${index + 1}`}><article><div className="service-number"><span>{service.id}</span><i /></div><div className="service-text"><h3>{t.services.items[index][0]}</h3><p>{t.services.items[index][1]}</p><a className="service-more" href={language === "ru" ? service.href : "#contact"}>{t.services.explore} <ArrowRight aria-hidden="true" size={14} /></a></div><div className="service-visual"><ServiceVisual type={service.visual} language={language} /></div></article></Reveal>)}
         </div>
       </div>
     </section>
@@ -160,7 +162,6 @@ export function BenefitsSection() {
   const { t } = useLanguage();
   return (
     <section className="benefits section-pad-sm">
-      <StickerBackdrop scene="benefits" />
       <div className="container benefits-layout">
         <div className="benefits-intro"><p className="eyebrow"><span />{t.benefits.eyebrow}</p><h2>{t.benefits.title} <em>{t.benefits.titleAccent}</em></h2><p>{t.benefits.copy}</p></div>
         <div className="benefit-list">{benefits.map((benefit, index) => <Reveal key={benefit.id} delay={index * 0.035}><article><span className="benefit-icon">{benefitIcons[index]}</span><span className="benefit-number">0{index + 1}</span><div><h3>{t.benefits.items[index][0]}</h3><p>{t.benefits.items[index][1]}</p></div></article></Reveal>)}</div>
@@ -213,7 +214,6 @@ export function ProcessSection() {
   }, []);
   return (
     <section id="process" className="process section-pad">
-      <StickerBackdrop scene="process" />
       <div className="container">
         <SectionHeading eyebrow={t.process.eyebrow} title={<>{t.process.titleTop}<br /><span className="soft">{t.process.titleBottom}</span></>} copy={t.process.copy} />
         <div className="timeline" ref={ref}><div className="timeline-line"><i /></div>{processSteps.map((step, index) => <article key={step.id} className="timeline-step"><span className="timeline-index">{step.id}</span><span className="timeline-dot"><i /></span><div><h3>{t.process.items[index][0]}</h3><p>{t.process.items[index][1]}</p></div><span className="timeline-phase">{t.process.phase} {index + 1}</span></article>)}</div>
@@ -224,10 +224,8 @@ export function ProcessSection() {
 
 export function TechnologiesSection() {
   const { t } = useLanguage();
-  const first = technologies.slice(0, 6);
-  const second = technologies.slice(6);
   return (
-    <section className="technologies section-pad-sm"><div className="container"><div className="tech-heading"><p className="eyebrow"><span />{t.technologies.eyebrow}</p><p>{t.technologies.copyTop}<br /><ShinyText text={t.technologies.copyBottom} /></p></div><div className="tech-rows"><div>{first.map((tech) => <span key={tech}>{tech}</span>)}</div><div>{second.map((tech) => <span key={tech}>{tech}</span>)}</div></div></div></section>
+    <section className="technologies section-pad-sm"><div className="container"><div className="tech-heading"><p className="eyebrow"><span />{t.technologies.eyebrow}</p><p>{t.technologies.copyTop}<br /><ShinyText text={t.technologies.copyBottom} /></p></div><TechKeyboard /></div></section>
   );
 }
 
@@ -240,7 +238,7 @@ export function Marquee() {
 export function AboutSection() {
   const { t } = useLanguage();
   return (
-    <section id="about" className="about section-pad"><StickerBackdrop scene="about" /><div className="container"><div className="about-top"><p className="eyebrow"><span />{t.about.eyebrow}</p><span className="about-side">{t.about.sideTop}<br />{t.about.sideBottom}</span></div><Reveal><p className="about-statement">{t.about.intro} <em>{t.about.accent}</em> {t.about.tail}</p></Reveal><div className="metrics">{metrics.map((metric, index) => <Reveal key={metric.value} delay={index * 0.07}><div><strong>{metric.value}</strong><span>{t.about.metrics[index]}</span></div></Reveal>)}</div></div></section>
+    <section id="about" className="about section-pad"><div className="container"><div className="about-top"><p className="eyebrow"><span />{t.about.eyebrow}</p><span className="about-side">{t.about.sideTop}<br />{t.about.sideBottom}</span></div><Reveal><p className="about-statement">{t.about.intro} <em>{t.about.accent}</em> {t.about.tail}</p></Reveal><div className="metrics">{metrics.map((metric, index) => <Reveal key={metric.value} delay={index * 0.07}><div><strong>{metric.value}</strong><span>{t.about.metrics[index]}</span></div></Reveal>)}</div></div></section>
   );
 }
 
@@ -248,7 +246,22 @@ export function ContactSection() {
   const { t } = useLanguage();
   const telegramUrl = `https://t.me/${siteConfig.telegram.replace(/^@/, "")}`;
   return (
-    <section id="contact" className="contact section-pad"><div className="contact-orb" /><StickerBackdrop scene="contact" /><div className="container"><div className="contact-heading"><p className="eyebrow"><span />{t.contact.eyebrow}</p><Reveal><h2>{t.contact.question}</h2></Reveal><Reveal delay={0.06}><h2 className="outline-line">{t.contact.titleTop}<br /><em>{t.contact.titleAccent}</em></h2></Reveal><p>{t.contact.copy}</p></div><div className="contact-layout"><div className="contact-direct"><span>{t.contact.ready}</span><MagneticButton href={telegramUrl} external className="telegram-button">{t.contact.telegram} <Send size={18} /></MagneticButton><a href={`mailto:${siteConfig.email}`}>{siteConfig.email} <ArrowUpRight size={16} /></a><div className="availability"><i /> {t.contact.available}</div></div><ContactForm /></div></div></section>
+    <section id="contact" className="contact section-pad">
+      <div className="contact-orb" />
+      <div className="container">
+        <div className="contact-heading"><p className="eyebrow"><span />{t.contact.eyebrow}</p><Reveal><h2>{t.contact.question}</h2></Reveal><Reveal delay={0.06}><h2 className="outline-line">{t.contact.titleTop}<br /><em>{t.contact.titleAccent}</em></h2></Reveal><p>{t.contact.copy}</p></div>
+        <div className="contact-layout">
+          <div className="contact-direct">
+            <StickerBackdrop scene="contact" />
+            <span>{t.contact.ready}</span>
+            <MagneticButton href={telegramUrl} external className="telegram-button">{t.contact.telegram} <Send size={18} /></MagneticButton>
+            <a href={`mailto:${siteConfig.email}`}>{siteConfig.email} <ArrowUpRight size={16} /></a>
+            <div className="availability"><i /> {t.contact.available}</div>
+          </div>
+          <ContactForm />
+        </div>
+      </div>
+    </section>
   );
 }
 

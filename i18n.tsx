@@ -279,17 +279,15 @@ const LanguageContext = createContext<{
   t: Copy;
 } | null>(null);
 
-function readLanguage(): Language {
-  if (typeof document === "undefined") return "en";
-  return document.documentElement.dataset.language === "ru" ? "ru" : "en";
-}
-
-export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [language, setLanguageState] = useState<Language>(readLanguage);
+export function LanguageProvider({ children, initialLanguage = "ru" }: { children: React.ReactNode; initialLanguage?: Language }) {
+  const [language, setLanguageState] = useState<Language>(initialLanguage);
 
   useEffect(() => {
-    document.documentElement.lang = language;
-    document.documentElement.dataset.language = language;
+    // The root provider also wraps English routes. Keep the document language
+    // tied to the URL while nested English providers render their own copy.
+    const documentLanguage = window.location.pathname === "/en" || window.location.pathname.startsWith("/en/") ? "en" : language;
+    document.documentElement.lang = documentLanguage;
+    document.documentElement.dataset.language = documentLanguage;
   }, [language]);
 
   const setLanguage = (next: Language) => {

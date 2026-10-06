@@ -25,6 +25,10 @@ export function StickerBackdrop({ scene, playing = false, reaction = false }: { 
     const container = canvasRef.current;
     if (!node || !container) return;
     const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const idleWindow = window as Window & {
+      requestIdleCallback?: (callback: IdleRequestCallback, options?: IdleRequestOptions) => number;
+      cancelIdleCallback?: (handle: number) => void;
+    };
     const connection = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
     const controller = new AbortController();
     let animation: AnimationItem | undefined;
@@ -34,6 +38,8 @@ export function StickerBackdrop({ scene, playing = false, reaction = false }: { 
     let played = false;
     let disposed = false;
     let replayTimer: number | undefined;
+    let idleHandle: number | undefined;
+    let loadRequestedAfterPageReady = false;
     let reacting = false;
     let previousReaction = false;
     const update = () => {
@@ -107,19 +113,38 @@ export function StickerBackdrop({ scene, playing = false, reaction = false }: { 
         if (!disposed) setState("error");
       }
     };
+    const requestLoad = () => {
+      if (scene !== "hero") {
+        void load();
+        return;
+      }
+      if (loadRequestedAfterPageReady) return;
+      loadRequestedAfterPageReady = true;
+      const start = () => {
+        if (disposed) return;
+        if (typeof idleWindow.requestIdleCallback === "function") {
+          idleHandle = idleWindow.requestIdleCallback(() => void load(), { timeout: 1500 });
+        } else {
+          replayTimer = idleWindow.setTimeout(() => void load(), 500);
+        }
+      };
+      if (document.readyState === "complete") start();
+      else window.addEventListener("load", start, { once: true, signal: controller.signal });
+    };
     const observer = "IntersectionObserver" in window ? new IntersectionObserver(([entry]) => {
       inView = entry.isIntersecting;
-      if (inView) void load();
+      if (inView) requestLoad();
       update();
     }, { threshold: 0.25 }) : undefined;
     if (observer) observer.observe(node);
-    else { inView = true; void load(); }
+    else { inView = true; requestLoad(); }
     motion.addEventListener("change", update);
     document.addEventListener("visibilitychange", update);
     return () => {
       disposed = true;
       if (scene === "keyboard") syncKeyboard.current = undefined;
       window.clearTimeout(replayTimer);
+      if (idleHandle !== undefined) idleWindow.cancelIdleCallback?.(idleHandle);
       controller.abort();
       observer?.disconnect();
       animation?.destroy();

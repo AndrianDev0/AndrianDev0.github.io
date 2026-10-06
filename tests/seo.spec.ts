@@ -69,6 +69,26 @@ test("unknown pages and missing assets return real 404 responses", async ({ requ
   expect((await request.get("/assets/does-not-exist.js")).status()).toBe(404);
 });
 
+test("critical NEBO visuals are published from their stable asset path", async ({ request }) => {
+  const assets = [
+    "/projects/nebo-assets/welcome-premium.webp",
+    "/projects/nebo-assets/welcome-premium.jpg",
+    "/projects/nebo-assets/case/bot-start.webp",
+    "/projects/nebo-assets/case/bot-welcome.webp",
+    "/projects/nebo-assets/case/bot-welcome-hd.webp",
+    "/projects/nebo-assets/case/prize-wheel.webp",
+    "/projects/nebo-assets/case/prize-wheel-hd.webp",
+    "/projects/nebo-assets/case/prize-result.webp",
+  ];
+
+  for (const asset of assets) {
+    const response = await request.get(asset);
+    expect(response.status(), asset).toBe(200);
+    expect(response.headers()["content-type"], asset).toMatch(/^image\/(?:webp|jpeg)/);
+    expect((await response.body()).byteLength, asset).toBeGreaterThan(1_000);
+  }
+});
+
 test("search engine ownership files stay published", async ({ request }) => {
   const home = await request.get("/");
   expect(await home.text()).toContain('<meta name="google-site-verification" content="BnAG3PijlF1RMPKWmJuEJmdRd4BQuqG9kUcDcfj6Ds0"');

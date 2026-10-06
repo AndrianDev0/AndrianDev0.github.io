@@ -361,7 +361,7 @@ section[id] { scroll-margin-top: 88px; }
   border-radius: 10px;
   background:
     linear-gradient(180deg, transparent 45%, rgba(7,8,10,.58)),
-    url('/nebo/welcome-premium.webp') center 48% / cover no-repeat,
+    url('/projects/nebo-assets/welcome-premium.webp') center 48% / cover no-repeat,
     linear-gradient(145deg, #31261c, #121316);
   box-shadow: inset 0 1px rgba(255,255,255,.06);
 }
@@ -608,7 +608,7 @@ section[id] { scroll-margin-top: 88px; }
   color: rgba(247,229,193,.72);
   background:
     linear-gradient(180deg, transparent 45%, rgba(6,7,9,.8)),
-    url('/nebo/welcome-premium.webp') center / cover no-repeat,
+    url('/projects/nebo-assets/welcome-premium.webp') center / cover no-repeat,
     linear-gradient(145deg,#33271c,#121316);
   box-shadow: inset 0 1px rgba(255,255,255,.06), 0 20px 38px rgba(0,0,0,.3);
   font: 600 5.5px var(--font-geist-mono),monospace;
@@ -935,7 +935,7 @@ section[id] { scroll-margin-top: 88px; }
 
 /* Accessibility polish */
 .timeline-step,.timeline-step.is-visible{opacity:1}
-.footer-bottom{font-size:10px}
+.footer-bottom{font-size:10px;color:#8a928f}
 .contact-form input:focus-visible,.contact-form textarea:focus-visible,.contact-form select:focus-visible{outline:2px solid var(--blue);outline-offset:2px;border-color:var(--blue);box-shadow:0 0 0 5px rgba(111,140,255,.12)}
 .service-more{min-height:44px;font-size:9px}
 .case-project-actions a{min-height:44px}

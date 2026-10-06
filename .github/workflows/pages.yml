@@ -45,3 +45,18 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+      - name: Verify published site and critical assets
+        env:
+          SITE_URL: ${{ steps.deployment.outputs.page_url }}
+        run: |
+          base="${SITE_URL%/}"
+          for path in \
+            / \
+            /projects/nebo-assets/welcome-premium.webp \
+            /projects/nebo-assets/case/bot-start.webp \
+            /projects/nebo-assets/case/bot-welcome.webp \
+            /projects/nebo-assets/case/prize-wheel.webp \
+            /projects/nebo-assets/case/prize-result.webp
+          do
+            curl --fail --location --silent --show-error --retry 8 --retry-delay 5 "$base$path" --output /dev/null
+          done

@@ -3,7 +3,7 @@ import { expect, test } from "@playwright/test";
 test("capture current English mobile portfolio", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/en", { waitUntil: "networkidle" });
-  await page.getByRole("button", { name: "Switch to dark theme" }).click();
+  await page.getByRole("button", { name: "Switch to light theme" }).click();
   await expect(page.locator("h1")).toBeVisible();
   await page.screenshot({ path: "output/playwright/en-mobile-hero.png" });
 
@@ -41,7 +41,7 @@ test("capture current English mobile portfolio", async ({ page }) => {
 test("capture SIMKA case on English mobile", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/en/projects/simka-store", { waitUntil: "networkidle" });
-  await page.getByRole("button", { name: "Switch to dark theme" }).click();
+  await page.getByRole("button", { name: "Switch to light theme" }).click();
   await expect(page.getByRole("heading", { name: "SIMKA STORE" })).toBeVisible();
   await page.screenshot({ path: "output/playwright/en-mobile-simka-case.png" });
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(390);

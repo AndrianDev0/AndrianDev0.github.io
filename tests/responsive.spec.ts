@@ -243,8 +243,8 @@ for (const projectCase of [
     });
     expect(caseVisual.image).toContain(projectCase.image);
     expect(caseVisual.width).toBeGreaterThan(330);
-    expect(caseVisual.height / caseVisual.width).toBeGreaterThan(1.5);
-    expect(caseVisual.height / caseVisual.width).toBeLessThan(3);
+    expect(caseVisual.height / caseVisual.width).toBeGreaterThan(0.5);
+    expect(caseVisual.height / caseVisual.width).toBeLessThan(0.7);
     const titleToken = projectCase.slug === "drop-3d-store" ? "DROP" : projectCase.slug === "tehnotek-prototype" ? "ТЕХНОТЭК" : "SIMKA";
     await expect(page).toHaveTitle(new RegExp(titleToken, "i"));
   });

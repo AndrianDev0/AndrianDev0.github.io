@@ -6,8 +6,8 @@ const visualContent = {
     index: "01",
   },
   chat: {
-    src: "/nebo/case/bot-welcome.webp",
-    small: "/nebo/case/bot-welcome.webp",
+    src: "/projects/nebo-assets/case/bot-welcome.webp",
+    small: "/projects/nebo-assets/case/bot-welcome.webp",
     label: { ru: "NEBO BISTRO / БОТ", en: "NEBO BISTRO / BOT" },
     index: "02",
   },

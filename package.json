@@ -18,8 +18,6 @@
     "quality": "pnpm typecheck && pnpm vercel-build && pnpm check:bundle && pnpm test:responsive && pnpm test:compatibility && pnpm test:seo && pnpm test:lighthouse"
   },
   "dependencies": {
-    "@vercel/analytics": "2.0.1",
-    "@vercel/speed-insights": "2.0.0",
     "lottie-web": "5.13.0",
     "lucide-react": "^0.468.0",
     "react": "19.2.6",

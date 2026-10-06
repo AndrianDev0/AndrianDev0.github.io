@@ -1,13 +1,11 @@
-import { lazy, StrictMode, Suspense, useEffect, useState } from "react";
+import { lazy, StrictMode, Suspense } from "react";
 import { createRoot } from "react-dom/client";
-import { Analytics } from "@vercel/analytics/react";
-import { SpeedInsights } from "@vercel/speed-insights/react";
 import HomeApp from "./home-app";
 import { LanguageProvider } from "./i18n";
 import "./app/globals.css";
 import "./styles/editorial-refresh.css";
 import "./styles/stickers.css";
-import { findIndexableRoute, productionOrigin } from "./site-registry";
+import { findIndexableRoute } from "./site-registry";
 import { ThemeProvider } from "./theme";
 
 const CaseApp = lazy(() => import("./case-app"));
@@ -34,32 +32,11 @@ function VercelApp() {
   );
 }
 
-function ProductionMonitoring() {
-  const [analyticsAvailable, setAnalyticsAvailable] = useState(false);
-
-  useEffect(() => {
-    if (!isProductionHost) return;
-    let active = true;
-    fetch("/_vercel/insights/script.js", { method: "HEAD", cache: "no-store" })
-      .then((response) => {
-        if (active && response.ok) setAnalyticsAvailable(true);
-      })
-      .catch(() => undefined);
-    return () => { active = false; };
-  }, []);
-
-  if (!isProductionHost) return null;
-  return <>{analyticsAvailable ? <Analytics /> : null}<SpeedInsights /></>;
-}
-
-const isProductionHost = window.location.origin === productionOrigin;
-
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ThemeProvider>
       <LanguageProvider initialLanguage={/^\/en(?:\/|$)/.test(window.location.pathname) ? "en" : "ru"}>
         <VercelApp />
-        <ProductionMonitoring />
       </LanguageProvider>
     </ThemeProvider>
   </StrictMode>,

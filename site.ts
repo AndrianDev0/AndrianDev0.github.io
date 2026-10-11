@@ -34,9 +34,3 @@ export function estimateTelegramUrl(projectType: string) {
 
   return `https://t.me/${siteConfig.telegram}?text=${encodeURIComponent(message)}`;
 }
-
-export const metrics = [
-  { value: "04" },
-  { value: "02" },
-  { value: "100%" },
-];

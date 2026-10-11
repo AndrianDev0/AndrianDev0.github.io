@@ -1,10 +1,11 @@
 "use client";
 
-import { ArrowRight, ArrowUpRight, CircleDot, Code2, Layers3, MoveUpRight, Send, Sparkles } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Send } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { benefits, processSteps, services } from "./content";
 import { TechKeyboard } from "./tech-keyboard";
-import { metrics, siteConfig } from "./site";
+import { siteConfig } from "./site";
+import { workItems } from "./work-catalog-data";
 import { portfolioHighlights, projectFacets, projects } from "./projects";
 import { ContactForm, Reveal, SectionHeading } from "./components";
 import { MagneticButton } from "./magnetic-button";
@@ -16,6 +17,7 @@ import { StickerBackdrop } from "./studio-stickers";
 import { featuredProjectEvent, type FeaturedProjectId } from "./featured-project";
 import "./styles/services.css";
 import "./styles/selected-work.css";
+import "./styles/about-summary.css";
 
 export function ProjectsSection() {
   const { language, t } = useLanguage();
@@ -156,7 +158,6 @@ export function ServicesSection() {
   );
 }
 
-const benefitIcons = [<Sparkles key="sparkles" />, <CircleDot key="circle" />, <MoveUpRight key="move" />, <Layers3 key="layers" />, <Code2 key="code" />];
 
 export function BenefitsSection() {
   const { t } = useLanguage();
@@ -164,7 +165,7 @@ export function BenefitsSection() {
     <section className="benefits section-pad-sm">
       <div className="container benefits-layout">
         <div className="benefits-intro"><p className="eyebrow"><span />{t.benefits.eyebrow}</p><h2>{t.benefits.title} <em>{t.benefits.titleAccent}</em></h2><p>{t.benefits.copy}</p></div>
-        <div className="benefit-list">{benefits.map((benefit, index) => <Reveal key={benefit.id} delay={index * 0.035}><article><span className="benefit-icon">{benefitIcons[index]}</span><span className="benefit-number">0{index + 1}</span><div><h3>{t.benefits.items[index][0]}</h3><p>{t.benefits.items[index][1]}</p></div></article></Reveal>)}</div>
+        <div className="benefit-list">{benefits.map((benefit, index) => <Reveal key={benefit.id} delay={index * 0.035}><article><span className="benefit-number" aria-hidden="true">0{index + 1}</span><div><h3>{t.benefits.items[index][0]}</h3><p>{t.benefits.items[index][1]}</p></div></article></Reveal>)}</div>
       </div>
     </section>
   );
@@ -237,8 +238,24 @@ export function Marquee() {
 
 export function AboutSection() {
   const { t } = useLanguage();
+  const totals = [
+    { id: "all", value: workItems.length },
+    { id: "website", value: workItems.filter(item => item.kind === "website").length },
+    { id: "bot", value: workItems.filter(item => item.kind === "bot").length },
+  ];
   return (
-    <section id="about" className="about section-pad"><div className="container"><div className="about-top"><p className="eyebrow"><span />{t.about.eyebrow}</p><span className="about-side">{t.about.sideTop}<br />{t.about.sideBottom}</span></div><Reveal><p className="about-statement">{t.about.intro} <em>{t.about.accent}</em> {t.about.tail}</p></Reveal><div className="metrics">{metrics.map((metric, index) => <Reveal key={metric.value} delay={index * 0.07}><div><strong>{metric.value}</strong><span>{t.about.metrics[index]}</span></div></Reveal>)}</div></div></section>
+    <section id="about" className="about section-pad">
+      <div className="container">
+        <div className="about-top"><p className="eyebrow"><span />{t.about.eyebrow}</p><span className="about-side">{t.about.sideTop}<br />{t.about.sideBottom}</span></div>
+        <Reveal><p className="about-statement">{t.about.intro} <em>{t.about.accent}</em> {t.about.tail}</p></Reveal>
+        <dl className="portfolio-summary">
+          {totals.map((total, index) => <div key={total.id}>
+            <dt>{t.about.metrics[index]}</dt>
+            <dd>{total.value}</dd>
+          </div>)}
+        </dl>
+      </div>
+    </section>
   );
 }
 

@@ -5,6 +5,7 @@ import { LanguageProvider } from "./i18n";
 import "./app/globals.css";
 import "./styles/editorial-refresh.css";
 import "./styles/stickers.css";
+import "./styles/mobile.css";
 import { findIndexableRoute } from "./site-registry";
 import { ThemeProvider } from "./theme";
 

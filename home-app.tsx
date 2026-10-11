@@ -6,10 +6,10 @@ import {
   Footer,
   Marquee,
   ProcessSection,
-  ProjectsSection,
   ServicesSection,
   TechnologiesSection,
 } from "./sections";
+import { WorkCatalog } from "./work-catalog";
 
 export default function HomeApp() {
   return (
@@ -17,7 +17,7 @@ export default function HomeApp() {
       <Header />
       <main id="main-content" tabIndex={-1}>
         <Hero />
-        <ProjectsSection />
+        <WorkCatalog />
         <ServicesSection />
         <BenefitsSection />
         <ProcessSection />

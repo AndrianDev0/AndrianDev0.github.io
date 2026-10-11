@@ -1,0 +1,65 @@
+.mobile-language { display: none; }
+
+@media (max-width: 900px) {
+  html { scroll-padding-top: 100px; }
+  .site-header .brand { min-height: 44px; }
+  .site-header .mobile-menu {
+    top: calc(100% + 4px);
+    max-height: calc(100vh - 110px);
+    max-height: calc(100dvh - 110px - env(safe-area-inset-top));
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+  .site-header .language-switcher { height: 50px; padding: 2px; }
+  .site-header .language-switcher button { width: 44px; height: 44px; }
+  .mobile-menu > a { flex-shrink: 0; }
+
+  .benefits, .process, .technologies, .marquee, .about, .contact {
+    content-visibility: visible;
+    contain-intrinsic-size: none;
+  }
+  .reveal, .reveal.is-visible { opacity: 1; transform: none; transition: none; }
+  .contact-form input, .contact-form textarea, .contact-form select { font-size: 16px; }
+  .contact-direct > a:nth-of-type(2) { min-height: 44px; font-size: 14px; }
+  .footer-main a, .footer-bottom a { display: inline-flex; align-items: center; min-height: 44px; min-width: 44px; font-size: 14px; }
+  .footer-main .footer-brand { font-size: 29px; }
+  .footer-main nav { flex-wrap: wrap; gap: 8px 20px; }
+  .footer-main > div { flex-wrap: wrap; gap: 12px 24px; }
+  footer { padding-bottom: env(safe-area-inset-bottom); }
+  .skip-link { min-height: 44px; }
+}
+
+@media (max-width: 760px) {
+  .work-catalog .catalog-project-name strong { font-size: 15px; }
+  .work-catalog .catalog-project-name small { font-size: 12px; }
+  .work-catalog .catalog-projects button { padding-block: 14px; }
+  .work-catalog .catalog-filters { gap: 8px; }
+  .work-catalog .catalog-filters button { font-size: 13px; }
+  .work-catalog .catalog-summary { font-size: 16px; }
+  .work-catalog .catalog-heading-aside > p,
+  .work-catalog .catalog-scope p,
+  .work-catalog .catalog-features li { font-size: 14px; }
+  .work-catalog .catalog-case-type { font-size: 12px; line-height: 1.5; }
+  .work-catalog .catalog-case-actions { flex-wrap: wrap; gap: 8px 16px; }
+  .work-catalog .catalog-case-actions a,
+  .work-catalog .catalog-case-actions button { font-size: 14px; }
+  .work-catalog .catalog-preview img { display: block; }
+}
+
+@media (max-width: 600px) {
+  .site-header .nav-shell { grid-template-columns: minmax(0, 1fr) auto auto; gap: 8px; }
+  .site-header .nav-actions > .language-switcher { display: none; }
+  .site-header .mobile-language { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-bottom: 14px; color: var(--muted); font-size: 14px; }
+  .hero .hero-project-controls { grid-template-columns: 1fr auto; row-gap: 4px; }
+  .hero .hero-project-dots { grid-column: 1 / -1; grid-row: 2; justify-content: center; gap: 8px; }
+  .hero .hero-project-dots button { width: 44px; height: 44px; display: grid; place-items: center; }
+  .hero .hero-project-dots button::before { width: 22px; }
+  .hero .hero-project-top { font-size: 9px; letter-spacing: .025em; gap: 8px; }
+  .hero .hero-project-footer > div span { font-size: 12px; }
+  .benefits-layout { gap: 32px; }
+  .benefit-list p, .timeline-step p, .benefits-intro > p:last-child { font-size: 15px; line-height: 1.65; }
+  .typing-toolbar > span { font-size: 16px; }
+  .typing-board .typing-key { font-size: 12px; }
+  .contact-heading > p:last-child { font-size: 15px; line-height: 1.65; }
+  .about-statement { font-size: clamp(32px, 8.8vw, 48px); line-height: 1.14; }
+}

@@ -53,7 +53,7 @@ const copy = {
       items: [
         ["More Than Code", "I start with the problem the product needs to solve — then choose the right interface and technology."],
         ["User-Focused", "Structure and interaction should feel clear without instructions, even when the system behind them is complex."],
-        ["Mobile First", "Every key flow is shaped for small screens, real touch targets, and changing contexts."],
+        ["Comfortable on any screen", "I adapt the layout for phones, tablets and desktops so text is easy to read and buttons are easy to tap."],
         ["End-to-End", "Design direction, development, integrations, testing, and launch stay connected from the first decision."],
         ["Built to Scale", "Clean data and component structures make the next feature easier to add, not harder."],
       ],
@@ -81,7 +81,7 @@ const copy = {
       intro: "I build digital products for businesses. My goal is not just to write code, but to create",
       accent: "clear, fast, visually strong products",
       tail: "that solve real problems.",
-      metrics: ["selected works", "product formats", "responsive interface"],
+      metrics: ["Projects in portfolio", "Websites", "Telegram bots"],
     },
     contact: {
       eyebrow: "START A PROJECT",
@@ -185,7 +185,7 @@ const copy = {
       items: [
         ["Больше, чем код", "Сначала разбираюсь, какую задачу должен решить продукт, а затем выбираю подходящий интерфейс и технологии."],
         ["Фокус на пользователе", "Структура и взаимодействие должны быть понятны без инструкций, даже если внутри работает сложная система."],
-        ["Сначала мобильные", "Ключевые сценарии проектируются для небольших экранов, реальных касаний и разных условий использования."],
+        ["Удобно на любом экране", "Адаптирую сайт под телефон, планшет и компьютер, чтобы текст было легко читать, а по кнопкам удобно нажимать."],
         ["От идеи до запуска", "Дизайн, разработка, интеграции, тестирование и запуск остаются связаны с первого решения."],
         ["Готово к развитию", "Чистая структура данных и компонентов упрощает добавление новых функций в будущем."],
       ],
@@ -210,10 +210,10 @@ const copy = {
       eyebrow: "ОБО МНЕ",
       sideTop: "РАБОТАЮ ОНЛАЙН",
       sideBottom: "ПО ВСЕМУ МИРУ",
-      intro: "Создаю цифровые продукты для бизнеса. Моя цель — не просто написать код, а сделать",
+      intro: "Создаю цифровые продукты для бизнеса. Стремлюсь не просто написать код, а сделать",
       accent: "понятный, быстрый и визуально сильный продукт",
       tail: "который решает реальную задачу.",
-      metrics: ["избранные работы", "формата продукта", "адаптивный интерфейс"],
+      metrics: ["Работы в портфолио", "Сайты", "Боты в Telegram"],
     },
     contact: {
       eyebrow: "ОБСУДИТЬ ПРОЕКТ",

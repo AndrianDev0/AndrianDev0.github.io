@@ -48,6 +48,7 @@ export function Header() {
   const { language, setLanguage, t } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const menuButton = useRef<HTMLButtonElement>(null);
   useEffect(() => {
     let frame = 0;
     let current = window.scrollY > 30;
@@ -71,10 +72,22 @@ export function Header() {
   }, []);
   useEffect(() => {
     if (!open) return;
-    const onKey = (event: KeyboardEvent) => event.key === "Escape" && setOpen(false);
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setOpen(false);
+        menuButton.current?.focus();
+      }
+    };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);
+
+  useEffect(() => {
+    const desktop = window.matchMedia("(min-width: 901px)");
+    const closeOnDesktop = () => { if (desktop.matches) setOpen(false); };
+    desktop.addEventListener("change", closeOnDesktop);
+    return () => desktop.removeEventListener("change", closeOnDesktop);
+  }, []);
 
   return (
     <header className={`site-header ${scrolled ? "is-scrolled" : ""}`}>
@@ -90,12 +103,19 @@ export function Header() {
           <ThemeToggle language={language} />
           <a className="nav-cta" href="#contact">{t.startProject} <ArrowUpRight aria-hidden="true" size={16} strokeWidth={1.9} /></a>
         </div>
-        <button type="button" className="menu-button" aria-label={open ? t.closeMenu : t.openMenu} aria-expanded={open} aria-controls="mobile-navigation" onClick={() => setOpen((value) => !value)}>
+        <button ref={menuButton} type="button" className="menu-button" aria-label={open ? t.closeMenu : t.openMenu} aria-expanded={open} aria-controls="mobile-navigation" onClick={() => setOpen((value) => !value)}>
           {open ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
         </button>
       </nav>
       {open ? (
           <div id="mobile-navigation" className="mobile-menu">
+            <div className="mobile-language" role="group" aria-label="Language / Язык">
+              <span>{language === "ru" ? "Язык сайта" : "Site language"}</span>
+              <div className="language-switcher">
+                <button type="button" className={language === "en" ? "is-active" : ""} aria-pressed={language === "en"} onClick={() => setLanguage("en")}>EN</button>
+                <button type="button" className={language === "ru" ? "is-active" : ""} aria-pressed={language === "ru"} onClick={() => setLanguage("ru")}>RU</button>
+              </div>
+            </div>
             {siteConfig.nav.map((item, index) => <a key={item.href} href={item.href} onClick={() => setOpen(false)}><span>0{index + 1}</span>{t.nav[index]}</a>)}
             <a className="mobile-menu-cta" href="#contact" onClick={() => setOpen(false)}>{t.startProject} <ArrowUpRight aria-hidden="true" size={17} strokeWidth={1.9} /></a>
           </div>

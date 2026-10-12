@@ -68,7 +68,7 @@
 .seo-related .container>span{color:#69717e;font:8px var(--font-geist-mono),monospace;letter-spacing:.18em}
 .seo-related a{margin-top:22px;display:flex;align-items:center;justify-content:space-between;gap:30px}
 .seo-related h2{margin:0;font-size:clamp(44px,6vw,88px);letter-spacing:-.07em;font-weight:520}
-.seo-related svg{width:42px;height:42px;color:#8798ff;transition:transform .3s}
+.seo-related svg{width:42px;height:42px;color:var(--accent);transition:transform .3s}
 .seo-related a:hover svg{transform:translate(5px,-5px)}
 .seo-cta{padding:150px 0;text-align:center;background:radial-gradient(circle at center,rgba(85,99,208,.16),transparent 45%),var(--surface-soft)}
 .seo-cta .eyebrow{justify-content:center}.seo-cta h2{margin:28px auto 0;font-size:clamp(54px,7vw,105px);line-height:.92;letter-spacing:-.075em;font-weight:530}.seo-cta>div>p:not(.eyebrow){margin:27px auto 0;color:var(--muted);font-size:16px}.seo-cta .button{margin-top:35px}

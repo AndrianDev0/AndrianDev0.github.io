@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { ArrowUpRight } from "lucide-react";
 import { useLanguage } from "./i18n";
 import { StickerBackdrop } from "./studio-stickers";
 import { featuredProjectEvent } from "./featured-project";
@@ -84,7 +85,7 @@ export function WorkCatalog() {
           {shown.map((project, index) => <button type="button" key={project.id} aria-pressed={selected.id === project.id} aria-controls="catalog-detail" onClick={() => pick(project.id)}>
             <span className="catalog-number">{String(index + 1).padStart(2, "0")}</span>
             <span className="catalog-project-name"><strong>{project.name}</strong><small>{project.type[language]}</small></span>
-            <span className="catalog-selection-mark" aria-hidden="true">↗</span>
+            <span className="catalog-selection-mark" aria-hidden="true" />
           </button>)}
         </nav>
         <div ref={detailRef} id="catalog-detail" className="catalog-detail" tabIndex={-1} aria-label={`${ru ? "Описание проекта" : "Project details"}: ${selected.name}`}>
@@ -102,7 +103,7 @@ export function WorkCatalog() {
               <ul className="catalog-features">{selected.features.map(feature => <li key={feature.en}>{feature[language]}</li>)}</ul>
               <div className="catalog-case-actions">
                 <button type="button" aria-expanded={expanded} aria-controls="catalog-scope" onClick={() => setExpanded(current => !current)}>{expanded ? (ru ? "Свернуть детали" : "Hide details") : (ru ? "Что сделано" : "Scope of work")}<span aria-hidden="true">{expanded ? "−" : "+"}</span></button>
-                {selected.slug ? <a href={`${language === "en" ? "/en" : ""}/projects/${selected.slug}`}>{ru ? "Полный кейс" : "Full case"}<span aria-hidden="true">↗</span></a> : selected.href && <a href={selected.href} target="_blank" rel="noreferrer">{selected.kind === "bot" ? (ru ? "Открыть бота" : "Open bot") : (ru ? "Открыть сайт" : "Open website")}<span aria-hidden="true">↗</span></a>}
+                {selected.slug ? <a href={`${language === "en" ? "/en" : ""}/projects/${selected.slug}`}>{ru ? "Полный кейс" : "Full case"}<ArrowUpRight aria-hidden="true" size={15} strokeWidth={1.8} /></a> : selected.href && <a href={selected.href} target="_blank" rel="noreferrer">{selected.kind === "bot" ? (ru ? "Открыть бота" : "Open bot") : (ru ? "Открыть сайт" : "Open website")}<ArrowUpRight aria-hidden="true" size={15} strokeWidth={1.8} /></a>}
               </div>
               <div className="catalog-scope" id="catalog-scope" hidden={!expanded}>
                 <p>{selected.note[language]}</p>

@@ -25,8 +25,8 @@
 .catalog-project-name { min-width: 0; }
 .catalog-project-name strong { font-size: 18px; letter-spacing: -.04em; font-weight: 600; display: block; }
 .catalog-project-name small { font-size: 11px; color: var(--muted); display: block; line-height: 1.5; margin-top: 6px; }
-.catalog-selection-mark { margin-left: auto; color: var(--muted); opacity: 0; }
-[aria-pressed="true"] > .catalog-selection-mark { opacity: 1; color: var(--accent); }
+.catalog-selection-mark { width: 6px; height: 6px; flex: none; margin-left: auto; border-radius: 50%; background: var(--accent); opacity: 0; transform: scale(.7); transition: opacity .18s, transform .18s; }
+[aria-pressed="true"] > .catalog-selection-mark { opacity: 1; transform: scale(1); }
 .catalog-detail { min-width: 0; scroll-margin-top: 105px; position: sticky; top: 110px; }
 .catalog-case { border: 1px solid var(--line); border-radius: 16px; overflow: hidden; background: var(--surface-soft); animation: catalog-enter .24s ease-out both; }
 .catalog-preview { margin: 0; background: #141612; position: relative; }
@@ -46,7 +46,7 @@
 .catalog-features li { font-size: 12px; line-height: 1.5; padding-left: 13px; position: relative; }
 .catalog-features li::before { content: ""; position: absolute; left: 0; top: .5em; width: 4px; height: 4px; background: var(--accent); border-radius: 50%; }
 .catalog-case-actions { display: flex; gap: 24px; border-top: 1px solid var(--line); padding-top: 15px; align-items: center; }
-.catalog-case-actions button, .catalog-case-actions a { display: inline-flex; align-items: center; justify-content: space-between; gap: 20px; min-height: 44px; font-size: 13px; border: 0; background: none; color: var(--text); cursor: pointer; padding: 0; }
+.catalog-case-actions button, .catalog-case-actions a { display: inline-flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 44px; font-size: 13px; border: 0; background: none; color: var(--text); cursor: pointer; padding: 0; }
 .catalog-case-actions a { margin-left: auto; color: var(--accent); }
 .catalog-case-actions button:hover, .catalog-case-actions a:hover { text-decoration: underline; text-underline-offset: 5px; }
 .catalog-case-actions button span { font-size: 23px; font-weight: 400; }
@@ -90,7 +90,6 @@
   .catalog-project-name strong { font-size: 13px; line-height: 1.4; letter-spacing: -.02em; }
   .catalog-project-name small { font-size: 10px; }
   .catalog-number { display: none; }
-  .catalog-selection-mark { font-size: 12px; }
   .catalog-detail { position: static; scroll-margin-top: 100px; }
   .catalog-back { display: block; min-height: 44px; margin-bottom: 10px; padding: 0; border: 0; background: none; color: var(--accent); cursor: pointer; font-size: 13px; }
   .catalog-case-body, .catalog-scenario { padding: 20px 18px; }

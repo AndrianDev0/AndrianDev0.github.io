@@ -84,7 +84,6 @@ export function WorkCatalog() {
           {shown.map((project, index) => <button type="button" key={project.id} aria-pressed={selected.id === project.id} aria-controls="catalog-detail" onClick={() => pick(project.id)}>
             <span className="catalog-number">{String(index + 1).padStart(2, "0")}</span>
             <span className="catalog-project-name"><strong>{project.name}</strong><small>{project.type[language]}</small></span>
-            <span className="catalog-selection-mark" aria-hidden="true">↗</span>
           </button>)}
         </nav>
         <div ref={detailRef} id="catalog-detail" className="catalog-detail" tabIndex={-1} aria-label={`${ru ? "Описание проекта" : "Project details"}: ${selected.name}`}>

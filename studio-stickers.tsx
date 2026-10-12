@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import type { AnimationItem } from "lottie-web";
 
 type StickerScene = "hero" | "work" | "contact" | "keyboard";
-const characters = { hero: "tongue", work: "smile", contact: "love", keyboard: "smile" } as const;
+const characters = { hero: "tongue", work: "wink", contact: "love", keyboard: "smile" } as const;
 
 export function StickerBackdrop({ scene, playing = false, reaction = false }: { scene: StickerScene; playing?: boolean; reaction?: boolean }) {
   const kind = characters[scene];

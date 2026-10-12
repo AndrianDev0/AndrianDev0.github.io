@@ -3,9 +3,9 @@
 .catalog-kicker { color: var(--accent); font-size: 13px; margin: 0 0 22px; }
 .catalog-heading h2 { margin: 0; font-size: clamp(42px, 5.5vw, 76px); letter-spacing: -.06em; line-height: 1.05; font-weight: 650; }
 .catalog-heading h2 span { color: var(--muted); }
-.catalog-heading-aside { position: relative; max-width: 330px; padding-top: 96px; }
+.catalog-heading-aside { position: relative; max-width: 330px; padding-top: 110px; }
 .catalog-heading-aside > p { font-size: 15px; line-height: 1.75; color: var(--muted); margin: 0; }
-.catalog-heading-aside .sticker-backdrop { position: absolute; width: 72px; height: 72px; inset: 0 0 auto auto; margin: 0; box-sizing: border-box; padding: 8px; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); }
+.catalog-heading-aside .sticker-backdrop { position: absolute; width: 100px; height: 100px; inset: 0 0 auto auto; }
 .catalog-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 24px; padding-bottom: 24px; border-bottom: 1px solid var(--line); }
 .catalog-filters { display: flex; flex-wrap: wrap; gap: 8px; }
 .catalog-filters button { display: inline-flex; align-items: center; gap: 16px; min-height: 48px; border: 1px solid var(--line); border-radius: 8px; padding: 11px 18px; color: var(--text); background: transparent; cursor: pointer; transition: background .18s, color .18s; }
@@ -25,6 +25,8 @@
 .catalog-project-name { min-width: 0; }
 .catalog-project-name strong { font-size: 18px; letter-spacing: -.04em; font-weight: 600; display: block; }
 .catalog-project-name small { font-size: 11px; color: var(--muted); display: block; line-height: 1.5; margin-top: 6px; }
+.catalog-selection-mark { margin-left: auto; color: var(--muted); opacity: 0; }
+[aria-pressed="true"] > .catalog-selection-mark { opacity: 1; color: var(--accent); }
 .catalog-detail { min-width: 0; scroll-margin-top: 105px; position: sticky; top: 110px; }
 .catalog-case { border: 1px solid var(--line); border-radius: 16px; overflow: hidden; background: var(--surface-soft); animation: catalog-enter .24s ease-out both; }
 .catalog-preview { margin: 0; background: #141612; position: relative; }
@@ -75,8 +77,8 @@
   .work-catalog { padding-block: 55px 70px; }
   .catalog-heading { display: block; margin-bottom: 30px; }
   .catalog-heading h2 { font-size: clamp(40px, 9vw, 65px); }
-  .catalog-heading-aside { padding-top: 22px; padding-right: 78px; max-width: none; }
-  .catalog-heading-aside .sticker-backdrop { width: 64px; height: 64px; top: 14px; }
+  .catalog-heading-aside { padding-top: 22px; padding-right: 80px; max-width: none; }
+  .catalog-heading-aside .sticker-backdrop { width: 70px; height: 70px; top: 18px; }
   .catalog-heading-aside > p { font-size: 13px; }
   .catalog-toolbar { display: block; }
   .catalog-toolbar > p { margin-top: 18px; }
@@ -88,6 +90,7 @@
   .catalog-project-name strong { font-size: 13px; line-height: 1.4; letter-spacing: -.02em; }
   .catalog-project-name small { font-size: 10px; }
   .catalog-number { display: none; }
+  .catalog-selection-mark { font-size: 12px; }
   .catalog-detail { position: static; scroll-margin-top: 100px; }
   .catalog-back { display: block; min-height: 44px; margin-bottom: 10px; padding: 0; border: 0; background: none; color: var(--accent); cursor: pointer; font-size: 13px; }
   .catalog-case-body, .catalog-scenario { padding: 20px 18px; }

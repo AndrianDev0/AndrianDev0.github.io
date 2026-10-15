@@ -255,7 +255,7 @@ export async function generateSeoPages(outDir: string) {
       schema = caseSchema(route.path, project, route.language, route.metadata);
     }
 
-    const html = injectRoot(applyMeta(template, {
+    let html = injectRoot(applyMeta(template, {
       lang: route.language,
       title: route.metadata.title,
       description: route.metadata.description,
@@ -265,6 +265,10 @@ export async function generateSeoPages(outDir: string) {
       alternates: absoluteAlternates(route.alternates),
       useSocialImage: route.metadata.useSocialImage,
     }), fallback);
+
+    if (route.kind === "home") {
+      html = html.replace("</head>", '<link rel="preload" as="image" type="image/svg+xml" href="/emoji/mickey/tongue.svg" fetchpriority="high" />\n  </head>');
+    }
 
     if (route.path === "/") await writeFile(indexPath, html, "utf8");
     else await writePage(outDir, route.path, html);

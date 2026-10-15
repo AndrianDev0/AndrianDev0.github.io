@@ -52,6 +52,14 @@ jobs:
           base="${SITE_URL%/}"
           for path in \
             / \
+            /emoji/mickey/tongue.svg \
+            /emoji/mickey/wink.svg \
+            /emoji/mickey/love.svg \
+            /emoji/mickey/smile.svg \
+            /emoji/mickey/tongue.json \
+            /emoji/mickey/wink.json \
+            /emoji/mickey/love.json \
+            /emoji/mickey/smile.json \
             /projects/nebo-assets/welcome-premium.webp \
             /projects/nebo-assets/case/bot-start.webp \
             /projects/nebo-assets/case/bot-welcome.webp \

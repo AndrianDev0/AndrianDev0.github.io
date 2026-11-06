@@ -1,5 +1,8 @@
 # Andrian.Dev Portfolio
 
+> **Роль репозитория:** публикация портфолио на GitHub Pages. Связанный репозиторий исходников: [andrian-dev-portfolio](https://github.com/AndrianDev0/andrian-dev-portfolio).
+
+
 A responsive portfolio and conversion landing page for a freelance developer building websites, Telegram bots, web apps, automation, and integrations.
 
 ## Run locally
